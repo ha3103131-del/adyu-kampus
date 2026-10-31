@@ -3,152 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0e2a">
+<meta name="theme-color" content="#0a0d28">
 <title>ADYÜ Kampüs</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--n1:#0b0e2a;--n2:#1b1647;--gold:#e8b04a;--rose:#d9667e;--tx:#ece8f5;--mut:#a09ec4;--gl:rgba(255,255,255,.06);--ln:rgba(232,176,74,.3);color-scheme:dark}
+:root{--n1:#0a0d28;--n2:#1b1647;--gold:#e8b04a;--tx:#f1eefa;--mut:#a3a1c6;--gl:rgba(255,255,255,.07);--ln:rgba(255,255,255,.13);--sp:cubic-bezier(.2,.9,.3,1.2);color-scheme:dark}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--n1)}
-body{margin:0;min-height:100vh;color:var(--tx);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
-body::before{content:"";position:fixed;inset:0;z-index:-1;
-background:radial-gradient(1.3px 1.3px at 20px 30px,#fff,#0000),radial-gradient(1px 1px at 90px 140px,#fffc,#0000),radial-gradient(1.7px 1.7px at 170px 60px,#e8b04a,#0000),radial-gradient(1px 1px at 240px 210px,#fff9,#0000),radial-gradient(1.3px 1.3px at 130px 260px,#fff,#0000),radial-gradient(ellipse at 50% 120%,#3a2467 0,#0000 60%),linear-gradient(180deg,var(--n1),var(--n2));
-background-size:300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,100% 100%,100% 100%;
-background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat}
-h1,h2,h3,.logo{font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 .5rem;line-height:1.1}
-h1{font-size:2.6rem;font-weight:700}h2{font-size:1.9rem;font-weight:700}h3{font-size:1.4rem;font-weight:700}
-header{position:sticky;top:0;z-index:10;display:flex;justify-content:center;padding:calc(.7rem + env(safe-area-inset-top)) 1rem .7rem;background:rgba(11,14,42,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
-.logo{margin:0;font-size:1.7rem;font-weight:700;color:var(--gold);letter-spacing:.02em}.logo span{color:var(--tx)}
-nav{display:flex;gap:.2rem}nav:empty{display:none}
-nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;min-height:50px;min-width:0;background:none;border:0;color:var(--mut);padding:.3rem .5rem;border-radius:12px;font:inherit;font-size:.72rem;cursor:pointer}
-nav button i{font-style:normal;font-size:1.25rem;line-height:1}
-nav button.on{color:var(--gold);background:rgba(232,176,74,.12)}
-main{max-width:640px;margin:0 auto;padding:1rem 1rem calc(6.5rem + env(safe-area-inset-bottom))}
-.hero{text-align:center;padding:.5rem 0 1.2rem}.hero svg{width:100%;max-width:420px;height:auto}.hero p{color:var(--mut);margin:.4rem auto 0;max-width:30ch}
-.box{background:var(--gl);border:1px solid var(--ln);border-radius:18px;padding:1.1rem;margin-bottom:1rem;backdrop-filter:blur(6px)}
-label{display:block;margin:.8rem 0 .25rem;font-weight:600;font-size:.92rem;color:var(--gold)}
-input,select,textarea{width:100%;min-height:48px;padding:.65rem .8rem;border:1px solid var(--ln);border-radius:12px;font:inherit;background:rgba(8,10,34,.7);color:var(--tx)}
+html{background:var(--n1);scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--tx);font:16px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;animation:tw 7s ease-in-out infinite alternate;
+background:radial-gradient(1.3px 1.3px at 20px 30px,#fff,#0000),radial-gradient(1px 1px at 90px 140px,#fffc,#0000),radial-gradient(1.7px 1.7px at 170px 60px,#e8b04a,#0000),radial-gradient(1px 1px at 240px 210px,#fff9,#0000),radial-gradient(1.3px 1.3px at 130px 260px,#fff,#0000),radial-gradient(ellipse at 50% 115%,#4a2a7a 0,#0000 60%),radial-gradient(ellipse at 90% -10%,#e8b04a33 0,#0000 45%),linear-gradient(180deg,var(--n1),var(--n2));
+background-size:300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,100% 100%,100% 100%,100% 100%;background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat,no-repeat}
+@keyframes tw{from{opacity:.7}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes flt{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
+@keyframes sunp{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+@keyframes glow{0%,100%{filter:hue-rotate(0) drop-shadow(0 0 3px #c77dff)}50%{filter:hue-rotate(50deg) drop-shadow(0 0 8px #ff7de9)}}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}40%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}100%{transform:translate(-50%,-80%) scale(1);opacity:0}}
+h1,h2,h3,.logo{font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 .5rem;line-height:1.08}
+h1{font-size:clamp(2.4rem,9vw,3.6rem);font-weight:700}h2{font-size:1.9rem;font-weight:700}h3{font-size:1.45rem;font-weight:700}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:center;padding:calc(.6rem + env(safe-area-inset-top)) 1rem .6rem;background:rgba(10,13,40,.7);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);border-bottom:1px solid var(--ln)}
+.logo{margin:0;font-size:1.7rem;font-weight:700;color:var(--gold)}.logo span{color:var(--tx)}
+main{max-width:680px;margin:0 auto;padding:1rem 1rem calc(7rem + env(safe-area-inset-bottom))}
+.v>*{animation:rise .6s var(--sp) both}.v>*:nth-child(2){animation-delay:.07s}.v>*:nth-child(3){animation-delay:.14s}.v>*:nth-child(4){animation-delay:.21s}.v>*:nth-child(5){animation-delay:.28s}
+.r{animation:rise .8s var(--sp) both;animation-delay:var(--d,0s)}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:460px;margin:0 auto;z-index:20;display:flex;gap:2px;padding:6px;border-radius:30px;background:rgba(20,18,60,.72);backdrop-filter:blur(22px) saturate(1.8);-webkit-backdrop-filter:blur(22px) saturate(1.8);border:1px solid var(--ln);box-shadow:0 12px 40px #0008}nav:empty{display:none}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:52px;min-width:0;background:none;border:0;color:var(--mut);border-radius:24px;font:inherit;font-size:.68rem;cursor:pointer;transition:all .3s var(--sp)}
+nav button i{font-style:normal;font-size:1.3rem;line-height:1.2}nav button.on{color:#1a1236;background:var(--gold);transform:scale(1.04)}
+.hero{text-align:center;padding:1rem 0 1.5rem}.sunwrap svg{width:100%;max-width:440px;height:auto}.sunwrap .sun{transform-origin:180px 86px;animation:sunp 5s ease-in-out infinite}
+.hero p{color:var(--mut);margin:.3rem auto 0;max-width:34ch;font-size:1.05rem}
+.demo{margin:2rem auto 0;max-width:340px;animation:flt 6s ease-in-out infinite}.demo .mut{display:block;margin-top:.6rem}
+.feat{display:grid;gap:.8rem;margin:1.5rem 0}.feat .box{margin:0}.feat i{font-style:normal;font-size:1.8rem;color:var(--gold)}.feat h3{margin:.2rem 0}.feat p{margin:0;color:var(--mut)}
+@media(min-width:620px){.feat{grid-template-columns:repeat(3,1fr)}}
+.box{background:var(--gl);border:1px solid var(--ln);border-radius:26px;padding:1.2rem;margin-bottom:1rem;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.steps ol{margin:.5rem 0 0;padding-left:1.3rem;color:var(--mut)}.steps li{margin:.4rem 0}.steps b{color:var(--tx)}
+label{display:block;margin:.9rem 0 .3rem;font-weight:600;font-size:.9rem;color:var(--gold)}
+input,select,textarea{width:100%;min-height:50px;padding:.7rem .9rem;border:1px solid var(--ln);border-radius:16px;font:inherit;background:rgba(8,10,34,.6);color:var(--tx);transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 4px rgba(232,176,74,.18)}
 input::placeholder,textarea::placeholder{color:#7d7ba3}
-input[type=checkbox]{width:20px;min-height:0;height:20px;accent-color:var(--gold);flex:none;margin-top:.2rem}
-.chk{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;color:var(--tx);margin:.7rem 0;font-size:.9rem}
-.tags{display:flex;flex-wrap:wrap;gap:.45rem}
-.tags label{margin:0;font-weight:500;color:var(--tx)}
-.tags input{display:none}
-.tags span{display:inline-block;padding:.45rem .9rem;border-radius:99px;border:1px solid var(--ln);cursor:pointer}
-.tags input:checked+span{background:var(--gold);color:#1a1236;border-color:var(--gold);font-weight:600}
-.btn{display:inline-block;background:var(--gl);color:var(--tx);border:1px solid var(--ln);border-radius:12px;min-height:48px;padding:.7rem 1.2rem;font:inherit;font-weight:600;cursor:pointer;margin:.8rem .5rem 0 0}
-.btn.amb{background:var(--gold);color:#1a1236;border-color:var(--gold)}.btn.ghost{background:none;color:var(--mut)}
-.mut{color:var(--mut);font-size:.9rem}
-.pc{position:relative;overflow:hidden;border-radius:22px;padding:1.6rem 1.4rem;min-height:290px;color:var(--tx);border:1px solid var(--gold);
-background:radial-gradient(circle at 88% 10%,rgba(232,176,74,.6),transparent 42%),radial-gradient(1.5px 1.5px at 20% 80%,#fff,#0000),linear-gradient(160deg,#2a1f66,#0e1032);
-box-shadow:0 0 0 4px rgba(232,176,74,.08),0 18px 40px #0009;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.pc::after{content:"";position:absolute;inset:8px;border:1px solid var(--ln);border-radius:16px;pointer-events:none}
-.pc h2{font-size:2.3rem;color:#fff;margin-bottom:.2rem}
-.pc .chip{display:inline-block;background:rgba(232,176,74,.14);border:1px solid var(--ln);border-radius:99px;padding:.2rem .7rem;margin:.2rem .25rem .2rem 0;font-size:.88rem}
-.pc .brand{margin-top:1.1rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem}
-.act{display:flex;justify-content:center;gap:2rem;margin-top:1.2rem}
-.act button{width:72px;height:72px;border-radius:50%;border:1px solid var(--ln);font-size:1.8rem;cursor:pointer;background:rgba(8,10,34,.8);color:var(--tx)}
-.row{display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+input[type=checkbox]{width:22px;min-height:0;height:22px;accent-color:var(--gold);flex:none;margin-top:.15rem}
+.chk{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;color:var(--tx);margin:.8rem 0;font-size:.9rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem}.tags label{margin:0;font-weight:500;color:var(--tx)}.tags input{display:none}
+.tags span{display:inline-block;padding:.5rem .95rem;border-radius:99px;border:1px solid var(--ln);cursor:pointer;transition:all .25s var(--sp)}
+.tags input:checked+span{background:var(--gold);color:#1a1236;border-color:var(--gold);font-weight:600;transform:scale(1.06)}
+.tags.avs span{font-size:1.4rem;padding:.35rem .65rem}
+.btn{display:inline-block;background:var(--gl);color:var(--tx);border:1px solid var(--ln);border-radius:16px;min-height:50px;padding:.75rem 1.3rem;font:inherit;font-weight:600;cursor:pointer;margin:.8rem .5rem 0 0;text-decoration:none;text-align:center;transition:transform .2s var(--sp),filter .2s}
+.btn:active{transform:scale(.94)}.btn:hover{filter:brightness(1.12)}
+.btn.amb{background:linear-gradient(135deg,#f3c46a,#e8b04a);color:#1a1236;border-color:transparent;box-shadow:0 6px 22px rgba(232,176,74,.28)}
+.btn.sup{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff}.btn.ghost{background:none;color:var(--mut)}.btn.sm{min-height:40px;padding:.4rem .9rem;margin:0}
+.mut{color:var(--mut);font-size:.92rem}
+.bd{width:1em;height:1em;margin-left:.28em;vertical-align:-.12em;fill:#0a84ff;flex:none}.bd.super{fill:#b45cff;animation:glow 3s ease-in-out infinite}
+.pc{position:relative;overflow:hidden;text-align:left;border-radius:30px;padding:1.5rem 1.4rem;min-height:300px;color:var(--tx);border:1px solid rgba(232,176,74,.7);
+background:radial-gradient(circle at 90% 8%,rgba(232,176,74,.6),transparent 42%),radial-gradient(1.5px 1.5px at 20% 82%,#fff,#0000),linear-gradient(160deg,#2c2070,#0d0f33);
+box-shadow:0 0 0 4px rgba(232,176,74,.08),0 24px 50px #000a;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.pc::after{content:"";position:absolute;inset:8px;border:1px solid rgba(232,176,74,.28);border-radius:23px;pointer-events:none}
+.ph{display:flex;gap:.8rem;align-items:center;margin-bottom:.6rem}.ph h2{font-size:2rem;color:#fff;margin:0;display:flex;align-items:center}
+.av{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid var(--ln);font-size:1.7rem;flex:none}
+.pc .chip{display:inline-block;background:rgba(232,176,74,.14);border:1px solid rgba(232,176,74,.3);border-radius:99px;padding:.2rem .75rem;margin:.2rem .25rem .2rem 0;font-size:.88rem}
+.pc .brand{margin-top:1.1rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700}
+.act{display:flex;justify-content:center;gap:2.2rem;margin-top:1.3rem}
+.act button{width:76px;height:76px;border-radius:50%;border:1px solid var(--ln);font-size:1.9rem;cursor:pointer;background:rgba(8,10,34,.7);color:var(--tx);transition:transform .25s var(--sp)}.act button:active{transform:scale(.88)}
+.heart{position:fixed;left:50%;top:45%;font-size:6rem;color:#ff5b8a;pointer-events:none;z-index:40;animation:pop .8s ease-out forwards}
+.row{display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.65rem 0;border-bottom:1px solid var(--ln);flex-wrap:wrap}.row:last-child{border:0}
+.seg{display:flex;gap:4px;padding:4px;border-radius:20px;background:var(--gl);border:1px solid var(--ln);margin:.8rem 0 1rem}
+.seg button{flex:1;min-height:44px;border:0;border-radius:16px;background:none;color:var(--mut);font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:all .3s var(--sp)}.seg .on{background:var(--gold);color:#1a1236}
+.uc{display:flex;gap:.9rem}.uc .ui{flex:1;min-width:0;display:flex;flex-direction:column;gap:.15rem;word-break:break-word}.uc b{display:flex;align-items:center}
+.acts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}.acts .btn{margin:0;flex:1;min-width:110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
 a{color:var(--gold)}
-#toast{position:fixed;left:50%;bottom:calc(5.5rem + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--gold);color:#1a1236;font-weight:600;padding:.7rem 1.1rem;border-radius:99px;max-width:90%;z-index:30;text-align:center}
+#toast{position:fixed;left:50%;bottom:calc(6.5rem + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--gold);color:#1a1236;font-weight:600;padding:.75rem 1.2rem;border-radius:99px;max-width:90%;z-index:50;text-align:center;box-shadow:0 10px 30px #0008}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-@media(max-width:700px){nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(11,14,42,.94);backdrop-filter:blur(12px);border-top:1px solid var(--ln);padding:.3rem .4rem calc(.3rem + env(safe-area-inset-bottom))}}
-@media(min-width:701px){header{justify-content:space-between;align-items:center}nav button{flex-direction:row;gap:.4rem;font-size:.95rem;flex:none;padding:.4rem .9rem}main{padding-bottom:3rem}#toast{bottom:1.5rem}}
+@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<header><div class="logo">✦ adyü<span>kampüs</span></div><nav id="nav"></nav></header>
+<header><div class="logo">✦ adyü<span>kampüs</span></div></header>
 <main id="app"></main>
+<nav id="nav"></nav>
 <div id="toast" hidden></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-// 1) Supabase > Project Settings > API değerlerini yaz
 const SB_URL = 'https://kmrulrtyoezkbirwxdem.supabase.co', SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttcnVscnR5b2V6a2Jpcnd4ZGVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTk1MjEsImV4cCI6MjEwOTAzNTUyMX0.VfR6uH2JRlugl4765MNxgLPX_w4qWhAqxetK79U1mKE';
 const sb = supabase.createClient(SB_URL, SB_KEY);
+const ADMIN = location.pathname.replace(/\/+$/, '') === '/admin';
 const TAGS = ['Yazılım','Enerji','Girişimcilik','Müzik','Spor','Kitap','Oyun','Fotoğraf','Gezi','Film','Satranç','Tasarım'];
 const YEARS = ['Hazırlık','1. sınıf','2. sınıf','3. sınıf','4. sınıf','Yüksek lisans'];
+const AVS = ['✦','☾','☀','🦉','🦅','🐺','🌿','⚡','🔥','🎧','🎮','📚'];
 const $ = s => document.querySelector(s), app = $('#app');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const toast = m => { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(t._t); t._t = setTimeout(() => t.hidden = true, 3000); };
+const toast = m => { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(t._t); t._t = setTimeout(() => t.hidden = true, 3200); };
 const contactLink = (t, c) => t === 'instagram'
   ? `<a href="https://instagram.com/${esc(c.replace('@',''))}" target="_blank" rel="noopener">@${esc(c.replace('@',''))}</a>`
   : `<a href="https://wa.me/${esc(c.replace(/\D/g,''))}" target="_blank" rel="noopener">${esc(c)}</a>`;
-let user, me, isAdmin = false, tab = 'card', queue = [];
+const badge = b => b ? `<svg class="bd ${b}" viewBox="0 0 24 24" role="img" aria-label="${b === 'super' ? 'Süper onaylı' : 'Doğrulanmış'}"><path d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3.1 1 3.1-2.6 1.9-1 3-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3-2.6-1.9 1-3.1-1-3.1 2.6-1.9 1-3 3.2.1z"/><path d="M8 12.3l2.6 2.6L16 9.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : '';
+const view = h => { app.innerHTML = `<div class="v">${h}</div>`; };
+let user, me, isAdmin = false, tab = 'card', queue = [], A = { v: [], m: [], u: [] }, atab = 'v';
 
 sb.auth.onAuthStateChange((_, s) => { const u = s?.user || null; if (u?.id !== user?.id) { user = u; load(); } });
 sb.auth.getSession().then(({ data: { session } }) => { if (!session) load(); });
 
 async function load() {
-  if (!user) { me = null; isAdmin = false; nav(); return loginView(); }
-  const { data } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
-  me = data;
+  if (!user) { me = null; isAdmin = false; nav(); return ADMIN ? adminLogin() : landing(); }
   isAdmin = !!(await sb.rpc('is_admin')).data;
-  go(me ? tab : 'card');
+  if (ADMIN) return isAdmin ? adminLoad() : view(`<div class="box"><h2>Yetkin yok</h2><p class="mut">Bu sayfa sadece yöneticiler içindir.</p><a class="btn amb" href="/">Siteye dön</a> <button class="btn ghost" onclick="sb.auth.signOut()">Çıkış</button></div>`);
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+  me = data; go(me ? tab : 'card');
 }
 function nav() {
-  const items = user ? [['card','✦','Kartım'],['meet','☾','Buluştur'],['disc','❖','Keşfet'],['match','♥','Eşleşme'],...(isAdmin ? [['admin','⚙','Yönetici']] : [])] : [];
-  $('#nav').innerHTML = items.map(([k, i, l]) => `<button class="${k === tab ? 'on' : ''}" onclick="go('${k}')"><i>${i}</i>${l}</button>`).join('')
-    + (user ? `<button onclick="sb.auth.signOut()"><i>⎋</i>Çıkış</button>` : '');
+  const n = $('#nav'); if (ADMIN || !user) { n.innerHTML = ''; return; }
+  n.innerHTML = [['card','✦','Profil'],['meet','☾','Buluştur'],['disc','❖','Keşfet'],['match','♥','Eşleşme']].map(([k, i, l]) => `<button class="${k === tab ? 'on' : ''}" onclick="go('${k}')"><i>${i}</i>${l}</button>`).join('')
+    + `<button onclick="sb.auth.signOut()"><i>⎋</i>Çıkış</button>`;
 }
-function go(t) {
-  tab = t; nav();
-  ({ card: cardView, meet: meetView, disc: discView, match: matchView, admin: adminView })[t]();
-}
-
-function loginView() {
-  app.innerHTML = `<div class="hero"><svg viewBox="0 0 360 160" role="img" aria-label="Nemrut Dağı ve taş başlar">
-  <defs><radialGradient id="sun"><stop offset="0" stop-color="#f6d27a"/><stop offset=".45" stop-color="#e8b04a" stop-opacity=".55"/><stop offset="1" stop-color="#e8b04a" stop-opacity="0"/></radialGradient></defs>
-  <circle cx="180" cy="86" r="78" fill="url(#sun)"/>
-  <g fill="#080a22"><path d="M0 160V132Q70 122 108 106L128 98H232L252 106Q290 122 360 132V160Z"/>
-  <rect x="112" y="92" width="136" height="8"/>
-  ${[[124,22],[150,26],[180,34],[210,26],[236,22]].map(([x,h])=>`<rect x="${x-7}" y="${92-h-14}" width="14" height="${h+14}" rx="6"/><path d="M${x-8} ${92-h-12}L${x} ${92-h-26}L${x+8} ${92-h-12}Z"/>`).join('')}</g>
-  <g fill="#fff"><circle cx="40" cy="30" r="1.4"/><circle cx="90" cy="14" r="1"/><circle cx="300" cy="24" r="1.4"/><circle cx="330" cy="60" r="1"/><circle cx="60" cy="70" r="1"/></g></svg>
-  <h1>Nemrut'un gölgesinde tanış</h1><p>ADYÜ kartını yap, ortak yıldızı olanlarla buluş.</p></div>
-  <div class="box"><form onsubmit="login(event)"><label for="em">E-posta</label><input id="em" type="email" inputmode="email" autocomplete="email" required>
-  <p class="mut">Şifre yok. E-postana bir giriş bağlantısı gönderiyoruz.</p>
-  <button class="btn amb">Giriş bağlantısı gönder</button></form></div>`;
-}
+function go(t) { tab = t; nav(); ({ card: cardView, meet: meetView, disc: discView, match: matchView })[t](); }
 async function login(e) {
   e.preventDefault();
-  const { error } = await sb.auth.signInWithOtp({ email: $('#em').value.trim(), options: { emailRedirectTo: location.origin } });
-  toast(error ? 'Gönderilemedi: ' + error.message : 'Bağlantı e-postana gönderildi.');
+  const { error } = await sb.auth.signInWithOtp({ email: $('#em').value.trim(), options: { emailRedirectTo: location.origin + location.pathname } });
+  toast(error ? 'Gönderilemedi: ' + error.message : 'Giriş bağlantısı e-postana gönderildi.');
 }
+const loginBox = `<form onsubmit="login(event)"><label for="em">E-posta</label><input id="em" type="email" inputmode="email" autocomplete="email" required placeholder="ornek@mail.com">
+  <p class="mut">Şifre yok. E-postana bir bağlantı gönderiyoruz, tıklayınca giriş yapmış olursun. Hesabın yoksa aynı yolla otomatik açılır.</p>
+  <button class="btn amb">Giriş bağlantısı gönder</button></form>`;
 
 function previewHTML(p) {
-  return `<div class="pc"><h2>${esc(p.name || 'Adın')}</h2><div>${esc([p.dept, p.year].filter(Boolean).join(' · '))}</div>
-  <p>${esc(p.bio)}</p><div>${(p.interests || []).map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
-  <div class="brand">ADYÜ Kartı · adyukampus.com.tr</div></div>`;
+  return `<div class="pc"><div class="ph"><span class="av">${esc(p.avatar || '✦')}</span><div><h2>${esc(p.name || 'Adın')}${badge(p.badge)}</h2><div class="mut">${esc([p.dept, p.year].filter(Boolean).join(' · '))}</div></div></div>
+  <p>${esc(p.bio)}</p><div>${(p.interests || []).map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div><div class="brand">ADYÜ Kartı · adyukampus.com.tr</div></div>`;
 }
-function cardView() {
-  const p = me || { interests: [], contact_type: 'instagram' };
-  app.innerHTML = `<div class="box"><h2>${me ? 'Kartım' : 'ADYÜ kartını oluştur'}</h2>
-  <form onsubmit="saveCard(event)">
+
+function landing() {
+  const sample = { name: 'Elif K.', dept: 'Bilgisayar Müh.', year: '3. sınıf', bio: 'Gece kod yazar, sabah kahve arar.', interests: ['Yazılım','Müzik','Satranç'], badge: 'blue', avatar: '☾' };
+  app.innerHTML = `<div class="v"><section class="hero"><div class="sunwrap r"><svg viewBox="0 0 360 160" role="img" aria-label="Nemrut Dağı ve taş başlar">
+  <defs><radialGradient id="sun"><stop offset="0" stop-color="#f6d27a"/><stop offset=".45" stop-color="#e8b04a" stop-opacity=".55"/><stop offset="1" stop-color="#e8b04a" stop-opacity="0"/></radialGradient></defs>
+  <circle class="sun" cx="180" cy="86" r="78" fill="url(#sun)"/>
+  <g fill="#080a22"><path d="M0 160V132Q70 122 108 106L128 98H232L252 106Q290 122 360 132V160Z"/><rect x="112" y="92" width="136" height="8"/>
+  ${[[124,22],[150,26],[180,34],[210,26],[236,22]].map(([x, h]) => `<rect x="${x-7}" y="${92-h-14}" width="14" height="${h+14}" rx="6"/><path d="M${x-8} ${92-h-12}L${x} ${92-h-26}L${x+8} ${92-h-12}Z"/>`).join('')}</g>
+  <g fill="#fff"><circle cx="40" cy="30" r="1.4"/><circle cx="90" cy="14" r="1"/><circle cx="300" cy="24" r="1.4"/><circle cx="330" cy="60" r="1"/><circle cx="60" cy="70" r="1"/></g></svg></div>
+  <h1 class="r" style="--d:.1s">Nemrut'un gölgesinde tanış</h1>
+  <p class="r" style="--d:.2s">ADYÜ'lü öğrencilerin kendi kartını yaptığı, aynı ilgiyi paylaşanlarla buluştuğu yer.</p>
+  <a class="btn amb r" style="--d:.3s" href="#giris">Hemen başla</a>
+  <div class="demo r" style="--d:.45s">${previewHTML(sample)}<span class="mut">Örnek kart</span></div></section>
+  <section class="feat"><div class="box"><i>✦</i><h3>Kartını yap</h3><p>Bölümünü ve ilgi alanlarını yaz, kartını görsel olarak indirip hikâyende paylaş.</p></div>
+  <div class="box"><i>❖</i><h3>Keşfet</h3><p>Kartları kaydır. Karşılıklı beğenince iletişim bilgileri açılır.</p></div>
+  <div class="box"><i>☾</i><h3>Beni buluştur</h3><p>İlgi alanını seç, yeterli kişi olunca grubun kurulur.</p></div></section>
+  <section class="box steps"><h3>Nasıl işliyor?</h3><ol><li><b>Giriş bağlantısını al.</b> Şifre yok, e-postan yeterli.</li><li><b>Kartını oluştur.</b> İstersen doğrulat, ismin yanında mavi tik görünsün.</li><li><b>Kaydır ya da buluşma iste.</b></li><li><b>Grubun kurulunca</b> sana ulaşılır.</li></ol></section>
+  <section class="box"><h3>Güvenlik</h3><p class="mut" style="margin:0">İletişim bilgin kartında görünmez. Sadece grubu kuran yönetici ve karşılıklı eşleştiğin kişiler görür. Buluşma talepleri 30 gün sonra silinir. İstediğin an kartını ve verilerini silebilirsin.</p></section>
+  <section class="box" id="giris"><h3>Giriş yap</h3>${loginBox}</section></div>`;
+}
+
+async function cardView() {
+  const p = me || { interests: [], contact_type: 'instagram', avatar: '✦' };
+  let vr = null; if (me && !me.badge) vr = (await sb.from('verify_requests').select('*').eq('user_id', user.id).maybeSingle()).data;
+  const ver = !me ? '' : me.badge ? `<div class="box"><b>${badge(me.badge)} Profilin doğrulandı.</b></div>`
+    : vr ? `<div class="box"><b>Doğrulama isteğin alındı.</b><p class="mut">Yönetici seninle iletişime geçecek.</p><button class="btn ghost sm" onclick="cancelVerify()">İsteği geri çek</button></div>`
+    : `<div class="box"><h3>Profilini doğrula ${badge('blue')}</h3><p class="mut">İsteğe bağlı. Telefon numaranı yaz, yönetici sana ulaşıp doğrulasın. Onaylanınca isminin yanında mavi tik görünür ve diğer öğrenciler sana daha çok güvenir.</p>
+    <form onsubmit="reqVerify(event)"><input id="vp" type="tel" inputmode="tel" required placeholder="905xxxxxxxxx"><button class="btn amb">Doğrulama iste</button></form></div>`;
+  view(`${me ? `<div class="box">${previewHTML(me)}<button class="btn" onclick="downloadCard()">Kartı görsel olarak indir</button></div>${ver}` : `<div class="box"><h2>Profilini oluştur</h2><p class="mut" style="margin:0">Birkaç bilgi yeter. İletişim bilgin kartında görünmez.</p></div>`}
+  <div class="box"><h3>${me ? 'Profilimi düzenle' : 'Bilgilerin'}</h3><form onsubmit="saveCard(event)">
+  <label>Avatar</label><div class="tags avs">${AVS.map(a => `<label><input type="radio" name="av" value="${a}" ${a === (p.avatar || '✦') ? 'checked' : ''}><span>${a}</span></label>`).join('')}</div>
   <label for="n">Adın</label><input id="n" name="name" required maxlength="40" value="${esc(p.name)}">
   <label for="d">Bölümün</label><input id="d" name="dept" maxlength="60" value="${esc(p.dept)}">
   <label for="y">Sınıfın</label><select id="y" name="year">${YEARS.map(y => `<option ${y === p.year ? 'selected' : ''}>${y}</option>`).join('')}</select>
   <label>İlgi alanların</label><div class="tags">${TAGS.map(t => `<label><input type="checkbox" name="tag" value="${t}" ${p.interests.includes(t) ? 'checked' : ''}><span>${t}</span></label>`).join('')}</div>
   <label for="b">Kısa tanıtım</label><textarea id="b" name="bio" rows="2" maxlength="140">${esc(p.bio)}</textarea>
   <label for="ct">İletişim yolun</label><select id="ct" name="ct"><option value="instagram" ${p.contact_type === 'instagram' ? 'selected' : ''}>Instagram</option><option value="phone" ${p.contact_type === 'phone' ? 'selected' : ''}>Telefon (905xx...)</option></select>
-  <input name="contact" required placeholder="kullanici_adi veya 905xxxxxxxxx" value="${esc(p.contact)}">
-  <p class="mut">İletişim bilgin kartında görünmez. Sadece buluşturma grubunu kuran yönetici ve karşılıklı eşleştiğin kişiler görür.</p>
+  <input name="contact" required style="margin-top:.5rem" placeholder="kullanici_adi veya 905xxxxxxxxx" value="${esc(p.contact)}">
   <label class="chk"><input type="checkbox" name="disc" ${p.discoverable ? 'checked' : ''}> Kartım Keşfet bölümünde diğer öğrencilere gösterilsin.</label>
-  <label class="chk"><input type="checkbox" required> Verdiğim bilgilerin yalnızca tanışma amacıyla işlenmesini, yöneticiyle ve eşleştiğim kişilerle paylaşılmasını kabul ediyorum (KVKK aydınlatma metni için topluluğa yazabilirsin).</label>
-  <button class="btn amb">Kartı kaydet</button></form></div>
-  ${me ? `<div class="box">${previewHTML(me)}<button class="btn" onclick="downloadCard()">Kartı görsel olarak indir</button>
-  <button class="btn ghost" onclick="deleteMe()">Kartımı ve verilerimi sil</button></div>` : ''}`;
+  <label class="chk"><input type="checkbox" required> Verdiğim bilgilerin yalnızca tanışma amacıyla işlenmesini, yöneticiyle ve eşleştiğim kişilerle paylaşılmasını kabul ediyorum.</label>
+  <button class="btn amb">${me ? 'Kaydet' : 'Profilimi oluştur'}</button></form>
+  ${me ? `<button class="btn ghost" onclick="deleteMe()">Kartımı ve verilerimi sil</button>` : ''}</div>`);
 }
 async function saveCard(e) {
   e.preventDefault(); const f = new FormData(e.target);
-  const row = { id: user.id, name: f.get('name').trim(), dept: f.get('dept').trim(), year: f.get('year'), interests: f.getAll('tag'),
+  const row = { id: user.id, name: f.get('name').trim(), dept: f.get('dept').trim(), year: f.get('year'), interests: f.getAll('tag'), avatar: f.get('av'),
     bio: f.get('bio').trim(), contact_type: f.get('ct'), contact: f.get('contact').trim(), discoverable: f.get('disc') === 'on' };
   const { error } = await sb.from('profiles').upsert(row);
   if (error) return toast('Kaydedilemedi: ' + error.message);
-  me = row; toast('Kartın kaydedildi.'); cardView();
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).single(); me = data;
+  toast('Profilin kaydedildi.'); cardView();
 }
 async function deleteMe() {
   if (!confirm('Kartın ve tüm bilgilerin silinecek. Emin misin?')) return;
   await sb.from('profiles').delete().eq('id', user.id); me = null; toast('Verilerin silindi.'); cardView();
 }
+async function reqVerify(e) {
+  e.preventDefault();
+  const { error } = await sb.from('verify_requests').insert({ user_id: user.id, phone: $('#vp').value.trim() });
+  toast(error ? 'Gönderilemedi: ' + error.message : 'İsteğin alındı. Yönetici sana ulaşacak.'); cardView();
+}
+async function cancelVerify() { await sb.from('verify_requests').delete().eq('user_id', user.id); cardView(); }
 async function downloadCard() {
   try { await document.fonts.load("700 120px 'Cormorant Garamond'"); } catch (_) {}
   const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; const x = c.getContext('2d');
@@ -167,16 +208,16 @@ async function downloadCard() {
   c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'adyu-karti.png'; a.click(); });
 }
 
+function needCard() { view(`<div class="box"><p>Önce profilini oluşturman gerekiyor.</p><button class="btn amb" onclick="go('card')">Profilimi oluştur</button></div>`); }
+
 async function meetView() {
   if (!me) return needCard();
   const { data } = await sb.from('meetups').select('*').eq('user_id', user.id).gt('expires_at', new Date().toISOString()).order('created_at', { ascending: false });
-  app.innerHTML = `<div class="box"><h2>Beni buluştur</h2>
-  <p>İlgi alanını ve grup büyüklüğünü seç. Aynı konuda yeterli kişi olunca yönetici grubu kurup seni ekler. Talebin 30 gün sonra silinir.</p>
+  view(`<div class="box"><h2>Beni buluştur</h2><p class="mut">İlgi alanını ve grup büyüklüğünü seç. Aynı konuda yeterli kişi olunca yönetici grubu kurup seni ekler. Talebin 30 gün sonra silinir.</p>
   <form onsubmit="addMeet(event)"><label for="mi">Ne konuda?</label><select id="mi">${TAGS.map(t => `<option>${t}</option>`).join('')}</select>
   <label for="mg">Grup kaç kişilik olsun?</label><select id="mg">${[3,4,5,6,7].map(n => `<option ${n === 4 ? 'selected' : ''}>${n}</option>`).join('')}</select>
   <button class="btn amb">Beni buluştur</button></form></div>
-  <div class="box"><h3>Taleplerim</h3>${(data || []).map(m => `<div class="row"><span>${esc(m.interest)} · ${m.group_size} kişi · ${m.status === 'done' ? 'grup kuruldu' : 'bekliyor'}</span>
-  <button class="btn ghost" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut">Henüz talebin yok.</p>'}</div>`;
+  <div class="box"><h3>Taleplerim</h3>${(data || []).map(m => `<div class="row"><span>${esc(m.interest)} · ${m.group_size} kişi · ${m.status === 'done' ? 'grup kuruldu' : 'bekliyor'}</span><button class="btn ghost sm" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut" style="margin:0">Henüz talebin yok.</p>'}</div>`);
 }
 async function addMeet(e) {
   e.preventDefault();
@@ -184,57 +225,87 @@ async function addMeet(e) {
   toast(error ? 'Eklenemedi: ' + error.message : 'Talebin alındı.'); meetView();
 }
 async function delMeet(id) { await sb.from('meetups').delete().eq('id', id); meetView(); }
-function needCard() { app.innerHTML = `<div class="box"><p>Önce ADYÜ kartını oluşturman gerekiyor.</p><button class="btn amb" onclick="go('card')">Kartımı oluştur</button></div>`; }
 
 async function discView() {
   if (!me) return needCard();
-  if (!me.discoverable) { app.innerHTML = `<div class="box"><p>Başkalarının kartlarını görmek için kendi kartının da Keşfet'te görünmesine izin vermelisin.</p><button class="btn amb" onclick="go('card')">Kartımı düzenle</button></div>`; return; }
+  if (!me.discoverable) return view(`<div class="box"><p>Başkalarının kartlarını görmek için kendi kartının da Keşfet'te görünmesine izin vermelisin.</p><button class="btn amb" onclick="go('card')">Profilimi düzenle</button></div>`);
   const { data: sw } = await sb.from('swipes').select('to_id').eq('from_id', user.id);
   const seen = new Set([user.id, ...(sw || []).map(s => s.to_id)]);
   const { data } = await sb.from('cards').select('*').limit(100);
-  queue = (data || []).filter(c => !seen.has(c.id));
-  showTop();
+  queue = (data || []).filter(c => !seen.has(c.id)); showTop();
 }
 function showTop() {
   const c = queue[0];
-  if (!c) { app.innerHTML = `<div class="box"><p>Şimdilik gösterecek yeni kart kalmadı. Sonra tekrar bak.</p></div>`; return; }
-  app.innerHTML = `<div id="top">${previewHTML(c)}</div><div class="act"><button aria-label="Geç" onclick="swipe(false)">✕</button><button aria-label="Beğen" style="color:var(--red)" onclick="swipe(true)">♥</button></div>`;
+  if (!c) return view(`<div class="box"><h3>Şimdilik bu kadar</h3><p class="mut" style="margin:0">Gösterecek yeni kart kalmadı. Sonra tekrar bak.</p></div>`);
+  view(`<div id="top">${previewHTML(c)}</div><div class="act"><button aria-label="Geç" onclick="swipe(false)">✕</button><button aria-label="Beğen" style="color:#ff5b8a" onclick="swipe(true)">♥</button></div>`);
   const el = $('#top'); let sx = null;
-  el.onpointercancel = () => { sx = null; el.style.transform = ''; };
   el.onpointerdown = e => { sx = e.clientX; el.setPointerCapture(e.pointerId); };
   el.onpointermove = e => { if (sx !== null) { const dx = e.clientX - sx; el.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`; } };
-  el.onpointerup = e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; el.style.transform = '';
-    if (dx > 90) swipe(true); else if (dx < -90) swipe(false); };
+  el.onpointercancel = () => { sx = null; el.style.transform = ''; };
+  el.onpointerup = e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; el.style.transform = ''; if (dx > 90) swipe(true); else if (dx < -90) swipe(false); };
 }
 async function swipe(liked) {
   const c = queue.shift(); if (!c) return;
-  await sb.from('swipes').insert({ from_id: user.id, to_id: c.id, liked });
-  if (liked) { const { data } = await sb.rpc('my_matches'); if ((data || []).some(m => m.id === c.id)) toast(`${c.name} ile eşleştiniz! Eşleşmeler sekmesine bak.`); }
+  const el = $('#top'); if (el) { el.style.transition = 'transform .35s ease,opacity .35s'; el.style.transform = `translateX(${liked ? 160 : -160}%) rotate(${liked ? 18 : -18}deg)`; el.style.opacity = 0; }
+  if (liked) { const h = document.createElement('div'); h.className = 'heart'; h.textContent = '♥'; document.body.appendChild(h); setTimeout(() => h.remove(), 850); }
+  await Promise.all([sb.from('swipes').insert({ from_id: user.id, to_id: c.id, liked }), new Promise(r => setTimeout(r, 300))]);
+  if (liked) { const { data } = await sb.rpc('my_matches'); if ((data || []).some(m => m.id === c.id)) toast(`${c.name} ile eşleştiniz! Eşleşme sekmesine bak.`); }
   showTop();
 }
 async function matchView() {
   const { data } = await sb.rpc('my_matches');
-  app.innerHTML = `<div class="box"><h2>Eşleşmelerim</h2>${(data || []).map(m => `<div class="row"><b>${esc(m.name)}</b><span>${contactLink(m.contact_type, m.contact)}</span></div>`).join('') || '<p class="mut">Karşılıklı beğenince burada iletişim bilgisi görünür.</p>'}</div>`;
+  view(`<div class="box"><h2>Eşleşmelerim</h2>${(data || []).map(m => `<div class="row"><b style="display:flex;align-items:center">${esc(m.name)}${badge(m.badge)}</b><span>${contactLink(m.contact_type, m.contact)}</span></div>`).join('') || '<p class="mut" style="margin:0">Karşılıklı beğenince iletişim bilgisi burada görünür.</p>'}</div>`);
 }
 
-async function adminView() {
-  if (!isAdmin) return;
-  const { data } = await sb.from('meetups').select('*, profiles(name,dept,year,contact_type,contact)')
-    .eq('status', 'waiting').gt('expires_at', new Date().toISOString()).order('created_at');
-  const by = {}; (data || []).forEach(m => (by[m.interest + '|' + m.group_size] ||= []).push(m));
-  let ready = '', wait = '';
-  for (const [k, list] of Object.entries(by)) {
-    const [interest, size] = k.split('|'); const n = +size;
-    for (let i = 0; i + n <= list.length; i += n) {
-      const g = list.slice(i, i + n);
-      ready += `<div class="box"><h3>${esc(interest)} · ${n} kişilik grup</h3>${g.map(m => `<div class="row"><span>${esc(m.profiles.name)} <span class="mut">${esc(m.profiles.dept || '')} ${esc(m.profiles.year || '')}</span></span><span>${contactLink(m.profiles.contact_type, m.profiles.contact)}</span></div>`).join('')}
-      <button class="btn amb" onclick="doneGroup('${g.map(m => m.id).join(',')}')">Grup kuruldu</button></div>`;
-    }
-    const rest = list.length % n; if (rest) wait += `<div class="row"><span>${esc(interest)} · ${n} kişilik</span><span>${rest}/${n} kişi bekliyor</span></div>`;
-  }
-  app.innerHTML = `<h2>Hazır gruplar</h2>${ready || '<div class="box mut">Tamamlanan grup yok.</div>'}<div class="box"><h3>Bekleyenler</h3>${wait || '<span class="mut">Yok.</span>'}</div>`;
+/* ---------- /admin ---------- */
+function adminLogin() { view(`<div class="box"><h2>Yönetim</h2>${loginBox}</div>`); }
+async function adminLoad() {
+  const now = new Date().toISOString();
+  const [v, m, u] = await Promise.all([
+    sb.from('verify_requests').select('*, profiles(*)').order('created_at'),
+    sb.from('meetups').select('*, profiles(name,dept,year,contact_type,contact,badge,avatar)').eq('status', 'waiting').gt('expires_at', now).order('created_at'),
+    sb.from('profiles').select('*').order('created_at', { ascending: false })]);
+  A = { v: v.data || [], m: m.data || [], u: u.data || [] }; adminRender();
 }
-async function doneGroup(ids) { await sb.from('meetups').update({ status: 'done' }).in('id', ids.split(',').map(Number)); toast('Grup işaretlendi.'); adminView(); }
+function groupsOf(list) {
+  const by = {}; list.forEach(m => (by[m.interest + '|' + m.group_size] ||= []).push(m));
+  const ready = [], wait = [];
+  for (const [k, l] of Object.entries(by)) { const [interest, s] = k.split('|'), n = +s;
+    for (let i = 0; i + n <= l.length; i += n) ready.push({ interest, n, g: l.slice(i, i + n) });
+    if (l.length % n) wait.push({ interest, n, c: l.length % n }); }
+  return { ready, wait };
+}
+const who = p => `<div class="av">${esc(p.avatar || '✦')}</div>`;
+function adminRender() {
+  const G = groupsOf(A.m); let body = '';
+  if (atab === 'v') body = A.v.map(r => { const p = r.profiles || {}; return `<div class="box"><div class="uc">${who(p)}<div class="ui"><b>${esc(p.name)}${badge(p.badge)}</b>
+    <span class="mut">${esc([p.dept, p.year].filter(Boolean).join(' · '))}</span><span>Tel: <a href="tel:+${esc(r.phone.replace(/\D/g, ''))}">${esc(r.phone)}</a> · ${contactLink(p.contact_type, p.contact)}</span></div></div>
+    <div class="acts"><button class="btn amb" onclick="approve('${r.user_id}','blue')">Onayla</button><button class="btn sup" onclick="approve('${r.user_id}','super')">Süper onay</button><button class="btn ghost" onclick="rejectV('${r.user_id}')">Sil</button></div></div>`; }).join('') || '<div class="box mut">Bekleyen doğrulama isteği yok.</div>';
+  if (atab === 'm') body = G.ready.map(x => `<div class="box"><h3>${esc(x.interest)} · ${x.n} kişilik grup</h3>${x.g.map(m => `<div class="row"><span style="display:flex;align-items:center">${esc(m.profiles.name)}${badge(m.profiles.badge)} <span class="mut">&nbsp;${esc(m.profiles.dept || '')}</span></span><span>${contactLink(m.profiles.contact_type, m.profiles.contact)}</span></div>`).join('')}
+    <button class="btn amb" onclick="doneGroup('${x.g.map(m => m.id).join(',')}')">Grubu kurdum, onayla</button></div>`).join('')
+    + `<div class="box"><h3>Bekleyenler</h3>${G.wait.map(w => `<div class="row"><span>${esc(w.interest)} · ${w.n} kişilik</span><span class="mut">${w.c}/${w.n} kişi</span></div>`).join('') || '<span class="mut">Yok.</span>'}</div>`;
+  if (atab === 'u') body = `<input placeholder="İsim, bölüm ya da iletişim ara" oninput="usersList(this.value)"><div id="ul" style="margin-top:1rem"></div>`;
+  view(`<div class="top"><h2>Yönetim</h2><button class="btn ghost sm" onclick="sb.auth.signOut()">Çıkış</button></div>
+  <div class="seg"><button class="${atab === 'v' ? 'on' : ''}" onclick="atab='v';adminRender()">Doğrulama (${A.v.length})</button><button class="${atab === 'm' ? 'on' : ''}" onclick="atab='m';adminRender()">Buluşma (${G.ready.length})</button><button class="${atab === 'u' ? 'on' : ''}" onclick="atab='u';adminRender()">Kullanıcılar (${A.u.length})</button></div>${body}`);
+  if (atab === 'u') usersList('');
+}
+function usersList(q) {
+  q = q.toLowerCase();
+  $('#ul').innerHTML = A.u.filter(p => [p.name, p.dept, p.contact, ...(p.interests || [])].join(' ').toLowerCase().includes(q)).map(p => `<div class="box"><div class="uc">${who(p)}<div class="ui"><b>${esc(p.name)}${badge(p.badge)}</b>
+  <span class="mut">${esc([p.dept, p.year].filter(Boolean).join(' · '))}</span><span>${(p.interests || []).map(esc).join(', ') || '-'}</span><span class="mut">${esc(p.bio || '')}</span>
+  <span>${contactLink(p.contact_type, p.contact)} · Keşfet: ${p.discoverable ? 'açık' : 'kapalı'} · ${new Date(p.created_at).toLocaleDateString('tr-TR')}</span></div></div>
+  <div class="acts"><select onchange="setBadge('${p.id}',this.value)" aria-label="Tik"><option value="" ${!p.badge ? 'selected' : ''}>Tik yok</option><option value="blue" ${p.badge === 'blue' ? 'selected' : ''}>Mavi tik</option><option value="super" ${p.badge === 'super' ? 'selected' : ''}>Süper tik</option></select>
+  <button class="btn ghost" onclick="delUser('${p.id}')">Kullanıcıyı sil</button></div></div>`).join('') || '<div class="box mut">Kullanıcı bulunamadı.</div>';
+}
+async function approve(id, b) {
+  const { error } = await sb.from('profiles').update({ badge: b }).eq('id', id);
+  if (error) return toast('Hata: ' + error.message);
+  await sb.from('verify_requests').delete().eq('user_id', id); toast(b === 'super' ? 'Süper tik verildi.' : 'Onaylandı.'); adminLoad();
+}
+async function rejectV(id) { await sb.from('verify_requests').delete().eq('user_id', id); adminLoad(); }
+async function setBadge(id, b) { const { error } = await sb.from('profiles').update({ badge: b || null }).eq('id', id); toast(error ? 'Hata: ' + error.message : 'Güncellendi.'); const p = A.u.find(x => x.id === id); if (p) p.badge = b || null; }
+async function delUser(id) { if (!confirm('Bu kullanıcının profili silinecek. Emin misin?')) return; await sb.from('profiles').delete().eq('id', id); adminLoad(); }
+async function doneGroup(ids) { await sb.from('meetups').update({ status: 'done' }).in('id', ids.split(',').map(Number)); toast('Grup onaylandı, kart kaldırıldı.'); adminLoad(); }
 </script>
 </body>
 </html>
