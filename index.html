@@ -1,169 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Adyü Kampüs</title>
-<meta name="description" content="Adıyaman Üniversitesi öğrenci toplulukları, duyurular ve kampüs hayatı tek platformda.">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0e2a">
+<title>ADYÜ Kampüs</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F2F4F8;--sf:#fff;--ink:#0E1A3A;--mu:#5B6585;--ln:#DDE2EE;--ac:#2B44FF;--aci:#fff;--pop:#FFD23F;--ok:#12805C;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:dark){:root{--bg:#0B1020;--sf:#141B33;--ink:#EEF1FB;--mu:#9AA5C8;--ln:#26305A;--ac:#7585FF;--aci:#0B1020;--ok:#4FD1A1;color-scheme:dark}}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45;padding-bottom:90px}
-.wrap{max-width:560px;margin:0 auto;padding:0 16px}
-h1{font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:18px 0 12px}
-h2{font-size:18px;margin:22px 0 8px}
-.ac{color:var(--ac)}.note,small{color:var(--mu)}
-.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:13px;display:flex;gap:12px;align-items:center;margin-bottom:10px}
-.card.col{flex-direction:column;align-items:stretch;gap:8px}
-.ic{width:44px;height:44px;border-radius:13px;background:var(--bg);display:grid;place-items:center;font-size:22px;flex:none}
-.t{flex:1;min-width:0}.t b{display:block}
-.badge{background:var(--pop);color:#1A1400;font-weight:800;border-radius:8px;padding:2px 8px;font-size:14px}
-.btn{appearance:none;border:0;background:var(--ac);color:var(--aci);font:inherit;font-weight:600;border-radius:12px;padding:10px 15px;cursor:pointer}
-.btn.ghost{background:none;color:var(--ac);border:1px solid var(--ac)}.btn.done{background:var(--ln);color:var(--ink)}
-input,select{font:inherit;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--ln);background:var(--sf);color:var(--ink)}
-input[type=checkbox]{width:auto;margin-top:4px}
-.ck{display:flex;gap:8px;font-size:14px;color:var(--mu)}
-.chips{display:flex;gap:8px;margin-bottom:12px}
-.chip{border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:99px;padding:7px 16px;font:inherit;cursor:pointer}
-.chip.on{background:var(--ink);color:var(--bg)}
-.ad{border:1px dashed var(--mu);border-radius:16px;padding:12px 14px;margin:12px 0;background:var(--sf)}
-.ad small{font-size:12px;display:block}.ad b{display:block;font-size:17px}
-.stat{display:flex;gap:10px;margin:10px 0}.stat div{flex:1;background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:10px 12px}.stat b{font-size:26px;display:block;line-height:1.1}
-.row{display:flex;gap:8px;margin:8px 0}
-.msg{padding:10px 12px;border-radius:12px;font-weight:600;background:rgba(200,50,50,.15);color:#C83232}.msg.ok{background:rgba(18,128,92,.15);color:var(--ok)}
-.empty{color:var(--mu);padding:14px;border:1px dashed var(--ln);border-radius:14px;text-align:center}
-nav{position:fixed;left:0;right:0;bottom:0;background:var(--sf);border-top:1px solid var(--ln);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
-nav button{flex:1;border:0;background:none;color:var(--mu);font:inherit;font-size:11px;padding:5px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center}
-nav button span{font-size:20px}nav button.on{color:var(--ac);font-weight:600}
-.sheet{position:fixed;inset:0;background:rgba(5,8,20,.55);display:none;align-items:flex-end;z-index:9}.sheet.on{display:flex}
-.sheet .in{background:var(--sf);width:100%;max-width:560px;margin:0 auto;border-radius:24px 24px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));text-align:center}
-.code{font-size:34px;font-weight:800;letter-spacing:.06em;margin:6px 0}
+:root{--n1:#0b0e2a;--n2:#1b1647;--gold:#e8b04a;--rose:#d9667e;--tx:#ece8f5;--mut:#a09ec4;--gl:rgba(255,255,255,.06);--ln:rgba(232,176,74,.3);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--n1)}
+body{margin:0;min-height:100vh;color:var(--tx);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+background:radial-gradient(1.3px 1.3px at 20px 30px,#fff,#0000),radial-gradient(1px 1px at 90px 140px,#fffc,#0000),radial-gradient(1.7px 1.7px at 170px 60px,#e8b04a,#0000),radial-gradient(1px 1px at 240px 210px,#fff9,#0000),radial-gradient(1.3px 1.3px at 130px 260px,#fff,#0000),radial-gradient(ellipse at 50% 120%,#3a2467 0,#0000 60%),linear-gradient(180deg,var(--n1),var(--n2));
+background-size:300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,100% 100%,100% 100%;
+background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat}
+h1,h2,h3,.logo{font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 .5rem;line-height:1.1}
+h1{font-size:2.6rem;font-weight:700}h2{font-size:1.9rem;font-weight:700}h3{font-size:1.4rem;font-weight:700}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:center;padding:calc(.7rem + env(safe-area-inset-top)) 1rem .7rem;background:rgba(11,14,42,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.logo{margin:0;font-size:1.7rem;font-weight:700;color:var(--gold);letter-spacing:.02em}.logo span{color:var(--tx)}
+nav{display:flex;gap:.2rem}nav:empty{display:none}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;min-height:50px;min-width:0;background:none;border:0;color:var(--mut);padding:.3rem .5rem;border-radius:12px;font:inherit;font-size:.72rem;cursor:pointer}
+nav button i{font-style:normal;font-size:1.25rem;line-height:1}
+nav button.on{color:var(--gold);background:rgba(232,176,74,.12)}
+main{max-width:640px;margin:0 auto;padding:1rem 1rem calc(6.5rem + env(safe-area-inset-bottom))}
+.hero{text-align:center;padding:.5rem 0 1.2rem}.hero svg{width:100%;max-width:420px;height:auto}.hero p{color:var(--mut);margin:.4rem auto 0;max-width:30ch}
+.box{background:var(--gl);border:1px solid var(--ln);border-radius:18px;padding:1.1rem;margin-bottom:1rem;backdrop-filter:blur(6px)}
+label{display:block;margin:.8rem 0 .25rem;font-weight:600;font-size:.92rem;color:var(--gold)}
+input,select,textarea{width:100%;min-height:48px;padding:.65rem .8rem;border:1px solid var(--ln);border-radius:12px;font:inherit;background:rgba(8,10,34,.7);color:var(--tx)}
+input::placeholder,textarea::placeholder{color:#7d7ba3}
+input[type=checkbox]{width:20px;min-height:0;height:20px;accent-color:var(--gold);flex:none;margin-top:.2rem}
+.chk{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;color:var(--tx);margin:.7rem 0;font-size:.9rem}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.tags label{margin:0;font-weight:500;color:var(--tx)}
+.tags input{display:none}
+.tags span{display:inline-block;padding:.45rem .9rem;border-radius:99px;border:1px solid var(--ln);cursor:pointer}
+.tags input:checked+span{background:var(--gold);color:#1a1236;border-color:var(--gold);font-weight:600}
+.btn{display:inline-block;background:var(--gl);color:var(--tx);border:1px solid var(--ln);border-radius:12px;min-height:48px;padding:.7rem 1.2rem;font:inherit;font-weight:600;cursor:pointer;margin:.8rem .5rem 0 0}
+.btn.amb{background:var(--gold);color:#1a1236;border-color:var(--gold)}.btn.ghost{background:none;color:var(--mut)}
+.mut{color:var(--mut);font-size:.9rem}
+.pc{position:relative;overflow:hidden;border-radius:22px;padding:1.6rem 1.4rem;min-height:290px;color:var(--tx);border:1px solid var(--gold);
+background:radial-gradient(circle at 88% 10%,rgba(232,176,74,.6),transparent 42%),radial-gradient(1.5px 1.5px at 20% 80%,#fff,#0000),linear-gradient(160deg,#2a1f66,#0e1032);
+box-shadow:0 0 0 4px rgba(232,176,74,.08),0 18px 40px #0009;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.pc::after{content:"";position:absolute;inset:8px;border:1px solid var(--ln);border-radius:16px;pointer-events:none}
+.pc h2{font-size:2.3rem;color:#fff;margin-bottom:.2rem}
+.pc .chip{display:inline-block;background:rgba(232,176,74,.14);border:1px solid var(--ln);border-radius:99px;padding:.2rem .7rem;margin:.2rem .25rem .2rem 0;font-size:.88rem}
+.pc .brand{margin-top:1.1rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem}
+.act{display:flex;justify-content:center;gap:2rem;margin-top:1.2rem}
+.act button{width:72px;height:72px;border-radius:50%;border:1px solid var(--ln);font-size:1.8rem;cursor:pointer;background:rgba(8,10,34,.8);color:var(--tx)}
+.row{display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+a{color:var(--gold)}
+#toast{position:fixed;left:50%;bottom:calc(5.5rem + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--gold);color:#1a1236;font-weight:600;padding:.7rem 1.1rem;border-radius:99px;max-width:90%;z-index:30;text-align:center}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:700px){nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(11,14,42,.94);backdrop-filter:blur(12px);border-top:1px solid var(--ln);padding:.3rem .4rem calc(.3rem + env(safe-area-inset-bottom))}}
+@media(min-width:701px){header{justify-content:space-between;align-items:center}nav button{flex-direction:row;gap:.4rem;font-size:.95rem;flex:none;padding:.4rem .9rem}main{padding-bottom:3rem}#toast{bottom:1.5rem}}
 </style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
-<nav id="nav"></nav>
-<div class="sheet" id="sheet"></div>
+<header><div class="logo">✦ adyü<span>kampüs</span></div><nav id="nav"></nav></header>
+<main id="app"></main>
+<div id="toast" hidden></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-const SUPABASE_URL="https://sahhezlgqpdtvozeiacx.supabase.co";
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhaGhlemxncXBkdHZvemVpYWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxMjI1NzMsImV4cCI6MjEwODY5ODU3M30.N0F_BQFALxD2ukSTrq027QHWtD_mIGv254LT8tIJe7Q";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=i=>document.getElementById(i), v=i=>$(i).value.trim();
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let me=null,tab="home",mode="login";
+// 1) Supabase > Project Settings > API değerlerini yaz
+const SB_URL = 'https://kmrulrtyoezkbirwxdem.supabase.co', SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttcnVscnR5b2V6a2Jpcnd4ZGVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTk1MjEsImV4cCI6MjEwOTAzNTUyMX0.VfR6uH2JRlugl4765MNxgLPX_w4qWhAqxetK79U1mKE';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const TAGS = ['Yazılım','Enerji','Girişimcilik','Müzik','Spor','Kitap','Oyun','Fotoğraf','Gezi','Film','Satranç','Tasarım'];
+const YEARS = ['Hazırlık','1. sınıf','2. sınıf','3. sınıf','4. sınıf','Yüksek lisans'];
+const $ = s => document.querySelector(s), app = $('#app');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast = m => { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(t._t); t._t = setTimeout(() => t.hidden = true, 3000); };
+const contactLink = (t, c) => t === 'instagram'
+  ? `<a href="https://instagram.com/${esc(c.replace('@',''))}" target="_blank" rel="noopener">@${esc(c.replace('@',''))}</a>`
+  : `<a href="https://wa.me/${esc(c.replace(/\D/g,''))}" target="_blank" rel="noopener">${esc(c)}</a>`;
+let user, me, isAdmin = false, tab = 'card', queue = [];
 
-async function load(){
-  const {data:{session}}=await sb.auth.getSession();
-  if(!session){me=null;return render()}
-  const {data}=await sb.from("profiles").select("*").eq("id",session.user.id).single();
-  if(!data){await sb.auth.signOut();me=null;return render()}
-  me=data;render();
-}
-function msg(t,ok){$("am").innerHTML=`<div class="msg ${ok?"ok":""}">${esc(t)}</div>`}
-async function out(){await sb.auth.signOut();me=null;render()}
+sb.auth.onAuthStateChange((_, s) => { const u = s?.user || null; if (u?.id !== user?.id) { user = u; load(); } });
+sb.auth.getSession().then(({ data: { session } }) => { if (!session) load(); });
 
-function authView(){
-  const r=mode==="reg";
-  $("app").innerHTML=`<h1>Adyü <span class="ac">Kampüs</span></h1>
-  <p class="note">Öğrenciler için, öğrenciler tarafından. Adıyaman Üniversitesi’nin resmi sitesi değildir.</p>
-  <div class="chips"><button class="chip ${r?"":"on"}" onclick="mode='login';authView()">Giriş</button><button class="chip ${r?"on":""}" onclick="mode='reg';authView()">Kayıt ol</button></div>
-  <div class="card col">${r?`<input id="n" placeholder="Ad soyad"><input id="no" placeholder="Öğrenci numarası" inputmode="numeric"><input id="ph" placeholder="Telefon (05xx xxx xx xx)" inputmode="tel"><input id="dp" placeholder="Bölüm"><select id="gr"><option>Hazırlık</option><option>1. sınıf</option><option>2. sınıf</option><option>3. sınıf</option><option>4. sınıf</option><option>Lisansüstü</option></select>`:""}
-  <input id="em" type="email" placeholder="${r?"Üniversite e-postası":"E-posta"}"><input id="pw" type="password" placeholder="Şifre (en az 8 karakter)">
-  ${r?`<label class="ck"><input type="checkbox" id="k1"><span><a href="/kvkk.html" target="_blank">KVKK aydınlatma metnini</a> okudum, kişisel verilerimin işlenmesini kabul ediyorum.</span></label><label class="ck"><input type="checkbox" id="k2"><span>Bana duyuru ve bilgilendirme gönderilmesini kabul ediyorum.</span></label>`:""}
-  <button class="btn" onclick="${r?"reg()":"login()"}">${r?"Kaydı gönder":"Giriş yap"}</button><div id="am"></div></div>`;
+async function load() {
+  if (!user) { me = null; isAdmin = false; nav(); return loginView(); }
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+  me = data;
+  isAdmin = !!(await sb.rpc('is_admin')).data;
+  go(me ? tab : 'card');
 }
-async function reg(){
-  if(!v("n")||!v("no")||!v("ph")||!v("em")||$("pw").value.length<8)return msg("Tüm alanları doldur, şifre en az 8 karakter olsun.");
-  if(!$("k1").checked)return msg("KVKK onayı gerekli.");
-  const {data,error}=await sb.auth.signUp({email:v("em"),password:$("pw").value,options:{emailRedirectTo:location.origin,
-    data:{full_name:v("n"),student_no:v("no"),phone:v("ph"),department:v("dp"),grade:$("gr").value,marketing_ok:$("k2").checked}}});
-  if(error)return msg(/database/i.test(error.message)?"Kayıt yapılamadı: bu öğrenci no, telefon veya e-posta zaten kayıtlı ya da e-posta üniversite e-postası değil.":error.message);
-  if(data.session)return load();
-  msg("Doğrulama linkini e-postana gönderdik. Linke tıkla, sonra giriş yap.",1);
+function nav() {
+  const items = user ? [['card','✦','Kartım'],['meet','☾','Buluştur'],['disc','❖','Keşfet'],['match','♥','Eşleşme'],...(isAdmin ? [['admin','⚙','Yönetici']] : [])] : [];
+  $('#nav').innerHTML = items.map(([k, i, l]) => `<button class="${k === tab ? 'on' : ''}" onclick="go('${k}')"><i>${i}</i>${l}</button>`).join('')
+    + (user ? `<button onclick="sb.auth.signOut()"><i>⎋</i>Çıkış</button>` : '');
 }
-async function login(){
-  const {error}=await sb.auth.signInWithPassword({email:v("em"),password:$("pw").value});
-  if(error)return msg("E-posta veya şifre hatalı ya da e-postanı henüz doğrulamadın.");
-  load();
+function go(t) {
+  tab = t; nav();
+  ({ card: cardView, meet: meetView, disc: discView, match: matchView, admin: adminView })[t]();
 }
 
-async function home(){
-  const [a,d]=await Promise.all([sb.from("announcements").select("*").order("created_at",{ascending:false}).limit(20),sb.from("ads").select("*").eq("active",true)]);
-  return `<h1>Merhaba ${esc((me.full_name||"").split(" ")[0])} 👋</h1>`+
-  (d.data||[]).map(x=>`<div class="ad"><small>Reklam</small><b>${esc(x.title)}</b>${esc(x.body)}</div>`).join("")+
-  `<h2>Duyurular</h2>`+((a.data||[]).map(x=>`<div class="card col"><small>${esc(x.community)}</small>${esc(x.body)}</div>`).join("")||`<div class="empty">Henüz duyuru yok.</div>`);
+function loginView() {
+  app.innerHTML = `<div class="hero"><svg viewBox="0 0 360 160" role="img" aria-label="Nemrut Dağı ve taş başlar">
+  <defs><radialGradient id="sun"><stop offset="0" stop-color="#f6d27a"/><stop offset=".45" stop-color="#e8b04a" stop-opacity=".55"/><stop offset="1" stop-color="#e8b04a" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="180" cy="86" r="78" fill="url(#sun)"/>
+  <g fill="#080a22"><path d="M0 160V132Q70 122 108 106L128 98H232L252 106Q290 122 360 132V160Z"/>
+  <rect x="112" y="92" width="136" height="8"/>
+  ${[[124,22],[150,26],[180,34],[210,26],[236,22]].map(([x,h])=>`<rect x="${x-7}" y="${92-h-14}" width="14" height="${h+14}" rx="6"/><path d="M${x-8} ${92-h-12}L${x} ${92-h-26}L${x+8} ${92-h-12}Z"/>`).join('')}</g>
+  <g fill="#fff"><circle cx="40" cy="30" r="1.4"/><circle cx="90" cy="14" r="1"/><circle cx="300" cy="24" r="1.4"/><circle cx="330" cy="60" r="1"/><circle cx="60" cy="70" r="1"/></g></svg>
+  <h1>Nemrut'un gölgesinde tanış</h1><p>ADYÜ kartını yap, ortak yıldızı olanlarla buluş.</p></div>
+  <div class="box"><form onsubmit="login(event)"><label for="em">E-posta</label><input id="em" type="email" inputmode="email" autocomplete="email" required>
+  <p class="mut">Şifre yok. E-postana bir giriş bağlantısı gönderiyoruz.</p>
+  <button class="btn amb">Giriş bağlantısı gönder</button></form></div>`;
 }
-async function deals(){
-  const [d,c]=await Promise.all([sb.from("deals").select("id,description,discount,shops(name,emoji)").eq("active",true),sb.from("codes").select("deal_id,used_at").eq("student_id",me.id)]);
-  const m={};(c.data||[]).forEach(x=>m[x.deal_id]=x);
-  return `<h1>İndirimler</h1>`+((d.data||[]).map(x=>{const k=m[x.id];
-    return `<div class="card"><div class="ic">${esc(x.shops?.emoji)}</div><div class="t"><b>${esc(x.shops?.name)}</b><small>${esc(x.description)}</small><div><span class="badge">${esc(x.discount)}</span></div></div>${k?.used_at?`<button class="btn done" disabled>Kullanıldı</button>`:`<button class="btn" onclick="getCode('${x.id}')">${k?"Kodum":"Kodu al"}</button>`}</div>`}).join("")||`<div class="empty">Henüz indirim yok.</div>`);
+async function login(e) {
+  e.preventDefault();
+  const { error } = await sb.auth.signInWithOtp({ email: $('#em').value.trim(), options: { emailRedirectTo: location.origin } });
+  toast(error ? 'Gönderilemedi: ' + error.message : 'Bağlantı e-postana gönderildi.');
 }
-async function getCode(id){
-  const {data,error}=await sb.rpc("get_code",{p_deal:id});
-  if(error)return alert(error.message);
-  $("sheet").innerHTML=`<div class="in"><small>Kodun</small><div class="code">${esc(data)}</div><p class="note">Kasada göster. Tek kullanımlık ve sana özel.</p><button class="btn" onclick="$('sheet').classList.remove('on')">Tamam</button></div>`;
-  $("sheet").classList.add("on");go("deals");
-}
-async function list(){
-  const {data}=await sb.from("listings").select("*").order("created_at",{ascending:false}).limit(50);
-  return `<h1>İlanlar</h1><div class="card col"><select id="lc"><option>İkinci el</option><option>Ev</option><option>Ders</option></select><input id="lt" placeholder="Başlık"><input id="lp" placeholder="Fiyat (örn. 200 ₺)"><button class="btn" onclick="ins('listings',{category:$('lc').value,title:v('lt'),price:v('lp')},'list')">İlan ver</button></div>`+
-  (data||[]).map(x=>`<div class="card"><div class="t"><b>${esc(x.title)}</b><small>${esc(x.category)} · ${esc(x.price)}</small></div>${x.user_id===me.id||me.role==="admin"?`<button class="btn ghost" onclick="del('listings','${x.id}','list')">Sil</button>`:""}</div>`).join("");
-}
-async function shop(){
-  const {data}=await sb.from("codes").select("code,used_at,created_at,deals(description)").order("created_at",{ascending:false}).limit(100);
-  const L=data||[];
-  return `<h1>Esnaf paneli</h1><div class="stat"><div><b>${L.length}</b>verilen kod</div><div><b>${L.filter(x=>x.used_at).length}</b>kullanılan</div></div>
-  <div class="row"><input id="chk" placeholder="Öğrencinin kodu" autocapitalize="characters"><button class="btn" onclick="chk()">Onayla</button></div><div id="am"></div><h2>Kodlar</h2>`+
-  (L.map(x=>`<div class="card"><div class="t"><b>${esc(x.code)}</b><small>${esc(x.deals?.description)}</small></div><small>${x.used_at?"Kullanıldı":"Bekliyor"}</small></div>`).join("")||`<div class="empty">Henüz kod yok.</div>`);
-}
-async function chk(){
-  const {data,error}=await sb.rpc("use_code",{p_code:v("chk")});
-  if(error)return msg(error.message);
-  if(data==="ok"){msg("Geçerli kod. İndirimi uygula.",1);setTimeout(()=>go("shop"),1500)}
-  else msg(data==="used"?"Bu kod daha önce kullanılmış.":"Kod bulunamadı.");
-}
-async function admin(){
-  const cnt=t=>sb.from(t).select("*",{count:"exact",head:true});
-  const [s,d,a,ad,p,c,u]=await Promise.all([sb.from("shops").select("*").order("name"),sb.from("deals").select("id,description,discount,shops(name)"),sb.from("announcements").select("*").order("created_at",{ascending:false}).limit(10),sb.from("ads").select("*"),cnt("profiles"),cnt("codes"),cnt("codes").not("used_at","is",null)]);
-  const so=(s.data||[]).map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join("");
-  const li=(arr,t,f)=>(arr.data||[]).map(x=>`<div class="card"><div class="t">${f(x)}</div><button class="btn ghost" onclick="del('${t}','${x.id}','admin')">Sil</button></div>`).join("");
-  return `<h1>Yönetim</h1><div class="stat"><div><b>${p.count}</b>kullanıcı</div><div><b>${c.count}</b>kod</div><div><b>${u.count}</b>kullanıldı</div></div>
-  <h2>Esnaf ekle</h2><div class="card col"><input id="sn" placeholder="İşletme adı"><input id="se" placeholder="Emoji (☕)"><button class="btn" onclick="ins('shops',{name:v('sn'),emoji:v('se')||'🏪'},'admin')">Ekle</button></div>
-  <h2>İndirim ekle</h2><div class="card col"><select id="ds">${so}</select><input id="dd" placeholder="Açıklama (Tüm içeceklerde)"><input id="dx" placeholder="İndirim (%20)"><button class="btn" onclick="ins('deals',{shop_id:$('ds').value,description:v('dd'),discount:v('dx')},'admin')">Ekle</button></div>
-  <h2>Esnafa panel yetkisi</h2><div class="card col"><input id="se2" type="email" placeholder="Esnaf hesabının e-postası"><select id="ss">${so}</select><button class="btn" onclick="setShop()">Yetki ver</button></div>
-  <h2>Duyuru ekle</h2><div class="card col"><input id="ac" placeholder="Topluluk / kaynak"><input id="ab" placeholder="Duyuru metni"><button class="btn" onclick="ins('announcements',{community:v('ac'),body:v('ab')},'admin')">Yayınla</button></div>
-  <h2>Reklam ekle</h2><div class="card col"><input id="rt" placeholder="Reklam başlığı"><input id="rb" placeholder="Kısa metin"><button class="btn" onclick="ins('ads',{title:v('rt'),body:v('rb')},'admin')">Ekle</button></div>
-  <h2>İndirimler</h2>${li(d,"deals",x=>`<b>${esc(x.shops?.name)}</b><small>${esc(x.discount)} · ${esc(x.description)}</small>`)}
-  <h2>Duyurular</h2>${li(a,"announcements",x=>`<b>${esc(x.community)}</b><small>${esc(x.body)}</small>`)}
-  <h2>Reklamlar</h2>${li(ad,"ads",x=>`<b>${esc(x.title)}</b><small>${esc(x.body)}</small>`)}`;
-}
-async function setShop(){
-  const {error}=await sb.rpc("set_shop_user",{p_email:v("se2"),p_shop:$("ss").value});
-  alert(error?error.message:"Yetki verildi.");
-}
-async function ins(t,o,to){const {error}=await sb.from(t).insert(o);if(error)return alert(error.message);go(to)}
-async function del(t,id,to){if(!confirm("Silinsin mi?"))return;const {error}=await sb.from(t).delete().eq("id",id);if(error)alert(error.message);go(to)}
 
-const V={home,deals,list,shop,admin};
-function go(t){
-  tab=t;document.querySelectorAll("#nav button[data-t]").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
-  $("app").innerHTML='<div class="empty" style="margin-top:20px">Yükleniyor…</div>';
-  V[t]().then(h=>{if(tab===t)$("app").innerHTML=h});
+function previewHTML(p) {
+  return `<div class="pc"><h2>${esc(p.name || 'Adın')}</h2><div>${esc([p.dept, p.year].filter(Boolean).join(' · '))}</div>
+  <p>${esc(p.bio)}</p><div>${(p.interests || []).map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+  <div class="brand">ADYÜ Kartı · adyukampus.com.tr</div></div>`;
 }
-function render(){
-  if(!me){$("nav").innerHTML="";return authView()}
-  const r=me.role,t=r==="shop"?[]:[["home","🏠","Ana sayfa"],["deals","🎟️","İndirim"],["list","🛍️","İlanlar"]];
-  if(r!=="student")t.push(["shop","🏪","Esnaf"]);
-  if(r==="admin")t.push(["admin","⚙️","Yönetim"]);
-  $("nav").innerHTML=t.map(x=>`<button data-t="${x[0]}"><span>${x[1]}</span>${x[2]}</button>`).join("")+`<button onclick="out()"><span>🚪</span>Çıkış</button>`;
-  document.querySelectorAll("#nav button[data-t]").forEach(b=>b.onclick=()=>go(b.dataset.t));
-  go(r==="shop"?"shop":"home");
+function cardView() {
+  const p = me || { interests: [], contact_type: 'instagram' };
+  app.innerHTML = `<div class="box"><h2>${me ? 'Kartım' : 'ADYÜ kartını oluştur'}</h2>
+  <form onsubmit="saveCard(event)">
+  <label for="n">Adın</label><input id="n" name="name" required maxlength="40" value="${esc(p.name)}">
+  <label for="d">Bölümün</label><input id="d" name="dept" maxlength="60" value="${esc(p.dept)}">
+  <label for="y">Sınıfın</label><select id="y" name="year">${YEARS.map(y => `<option ${y === p.year ? 'selected' : ''}>${y}</option>`).join('')}</select>
+  <label>İlgi alanların</label><div class="tags">${TAGS.map(t => `<label><input type="checkbox" name="tag" value="${t}" ${p.interests.includes(t) ? 'checked' : ''}><span>${t}</span></label>`).join('')}</div>
+  <label for="b">Kısa tanıtım</label><textarea id="b" name="bio" rows="2" maxlength="140">${esc(p.bio)}</textarea>
+  <label for="ct">İletişim yolun</label><select id="ct" name="ct"><option value="instagram" ${p.contact_type === 'instagram' ? 'selected' : ''}>Instagram</option><option value="phone" ${p.contact_type === 'phone' ? 'selected' : ''}>Telefon (905xx...)</option></select>
+  <input name="contact" required placeholder="kullanici_adi veya 905xxxxxxxxx" value="${esc(p.contact)}">
+  <p class="mut">İletişim bilgin kartında görünmez. Sadece buluşturma grubunu kuran yönetici ve karşılıklı eşleştiğin kişiler görür.</p>
+  <label class="chk"><input type="checkbox" name="disc" ${p.discoverable ? 'checked' : ''}> Kartım Keşfet bölümünde diğer öğrencilere gösterilsin.</label>
+  <label class="chk"><input type="checkbox" required> Verdiğim bilgilerin yalnızca tanışma amacıyla işlenmesini, yöneticiyle ve eşleştiğim kişilerle paylaşılmasını kabul ediyorum (KVKK aydınlatma metni için topluluğa yazabilirsin).</label>
+  <button class="btn amb">Kartı kaydet</button></form></div>
+  ${me ? `<div class="box">${previewHTML(me)}<button class="btn" onclick="downloadCard()">Kartı görsel olarak indir</button>
+  <button class="btn ghost" onclick="deleteMe()">Kartımı ve verilerimi sil</button></div>` : ''}`;
 }
-load();
+async function saveCard(e) {
+  e.preventDefault(); const f = new FormData(e.target);
+  const row = { id: user.id, name: f.get('name').trim(), dept: f.get('dept').trim(), year: f.get('year'), interests: f.getAll('tag'),
+    bio: f.get('bio').trim(), contact_type: f.get('ct'), contact: f.get('contact').trim(), discoverable: f.get('disc') === 'on' };
+  const { error } = await sb.from('profiles').upsert(row);
+  if (error) return toast('Kaydedilemedi: ' + error.message);
+  me = row; toast('Kartın kaydedildi.'); cardView();
+}
+async function deleteMe() {
+  if (!confirm('Kartın ve tüm bilgilerin silinecek. Emin misin?')) return;
+  await sb.from('profiles').delete().eq('id', user.id); me = null; toast('Verilerin silindi.'); cardView();
+}
+async function downloadCard() {
+  try { await document.fonts.load("700 120px 'Cormorant Garamond'"); } catch (_) {}
+  const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 400, 1350); g.addColorStop(0, '#2a1f66'); g.addColorStop(1, '#0b0e2a'); x.fillStyle = g; x.fillRect(0, 0, 1080, 1350);
+  const sun = x.createRadialGradient(900, 170, 0, 900, 170, 460); sun.addColorStop(0, 'rgba(246,210,122,.85)'); sun.addColorStop(1, 'rgba(232,176,74,0)'); x.fillStyle = sun; x.fillRect(0, 0, 1080, 1350);
+  x.fillStyle = '#fff'; for (let i = 0; i < 70; i++) { x.globalAlpha = .3 + (i * 37 % 7) / 10; x.fillRect((i * 193) % 1080, (i * 331) % 1350, 3, 3); } x.globalAlpha = 1;
+  x.strokeStyle = '#e8b04a'; x.lineWidth = 4; x.strokeRect(36, 36, 1008, 1278); x.lineWidth = 1.5; x.strokeRect(58, 58, 964, 1234);
+  x.fillStyle = '#fff'; x.font = "700 130px 'Cormorant Garamond',Georgia,serif"; x.fillText(me.name, 100, 330, 880);
+  x.font = '44px system-ui,sans-serif'; x.fillStyle = '#e8b04a'; x.fillText([me.dept, me.year].filter(Boolean).join(' · '), 100, 410, 880);
+  x.font = '40px system-ui,sans-serif'; x.fillStyle = '#dcd8ee';
+  let ln = '', y = 520; for (const w of (me.bio || '').split(' ')) { if (x.measureText(ln + w).width > 880) { x.fillText(ln, 100, y); y += 58; ln = ''; } ln += w + ' '; } x.fillText(ln, 100, y);
+  let px = 100, py = y + 130; x.font = '600 38px system-ui,sans-serif';
+  for (const t of me.interests) { const w = x.measureText(t).width + 56; if (px + w > 980) { px = 100; py += 92; }
+    x.fillStyle = 'rgba(232,176,74,.16)'; x.beginPath(); x.roundRect(px, py - 52, w, 76, 38); x.fill(); x.strokeStyle = 'rgba(232,176,74,.5)'; x.lineWidth = 2; x.stroke(); x.fillStyle = '#fff'; x.fillText(t, px + 28, py); px += w + 16; }
+  x.fillStyle = '#e8b04a'; x.font = "700 52px 'Cormorant Garamond',Georgia,serif"; x.fillText('✦ ADYÜ Kartı · adyukampus.com.tr', 100, 1230);
+  c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'adyu-karti.png'; a.click(); });
+}
+
+async function meetView() {
+  if (!me) return needCard();
+  const { data } = await sb.from('meetups').select('*').eq('user_id', user.id).gt('expires_at', new Date().toISOString()).order('created_at', { ascending: false });
+  app.innerHTML = `<div class="box"><h2>Beni buluştur</h2>
+  <p>İlgi alanını ve grup büyüklüğünü seç. Aynı konuda yeterli kişi olunca yönetici grubu kurup seni ekler. Talebin 30 gün sonra silinir.</p>
+  <form onsubmit="addMeet(event)"><label for="mi">Ne konuda?</label><select id="mi">${TAGS.map(t => `<option>${t}</option>`).join('')}</select>
+  <label for="mg">Grup kaç kişilik olsun?</label><select id="mg">${[3,4,5,6,7].map(n => `<option ${n === 4 ? 'selected' : ''}>${n}</option>`).join('')}</select>
+  <button class="btn amb">Beni buluştur</button></form></div>
+  <div class="box"><h3>Taleplerim</h3>${(data || []).map(m => `<div class="row"><span>${esc(m.interest)} · ${m.group_size} kişi · ${m.status === 'done' ? 'grup kuruldu' : 'bekliyor'}</span>
+  <button class="btn ghost" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut">Henüz talebin yok.</p>'}</div>`;
+}
+async function addMeet(e) {
+  e.preventDefault();
+  const { error } = await sb.from('meetups').insert({ user_id: user.id, interest: $('#mi').value, group_size: +$('#mg').value });
+  toast(error ? 'Eklenemedi: ' + error.message : 'Talebin alındı.'); meetView();
+}
+async function delMeet(id) { await sb.from('meetups').delete().eq('id', id); meetView(); }
+function needCard() { app.innerHTML = `<div class="box"><p>Önce ADYÜ kartını oluşturman gerekiyor.</p><button class="btn amb" onclick="go('card')">Kartımı oluştur</button></div>`; }
+
+async function discView() {
+  if (!me) return needCard();
+  if (!me.discoverable) { app.innerHTML = `<div class="box"><p>Başkalarının kartlarını görmek için kendi kartının da Keşfet'te görünmesine izin vermelisin.</p><button class="btn amb" onclick="go('card')">Kartımı düzenle</button></div>`; return; }
+  const { data: sw } = await sb.from('swipes').select('to_id').eq('from_id', user.id);
+  const seen = new Set([user.id, ...(sw || []).map(s => s.to_id)]);
+  const { data } = await sb.from('cards').select('*').limit(100);
+  queue = (data || []).filter(c => !seen.has(c.id));
+  showTop();
+}
+function showTop() {
+  const c = queue[0];
+  if (!c) { app.innerHTML = `<div class="box"><p>Şimdilik gösterecek yeni kart kalmadı. Sonra tekrar bak.</p></div>`; return; }
+  app.innerHTML = `<div id="top">${previewHTML(c)}</div><div class="act"><button aria-label="Geç" onclick="swipe(false)">✕</button><button aria-label="Beğen" style="color:var(--red)" onclick="swipe(true)">♥</button></div>`;
+  const el = $('#top'); let sx = null;
+  el.onpointercancel = () => { sx = null; el.style.transform = ''; };
+  el.onpointerdown = e => { sx = e.clientX; el.setPointerCapture(e.pointerId); };
+  el.onpointermove = e => { if (sx !== null) { const dx = e.clientX - sx; el.style.transform = `translateX(${dx}px) rotate(${dx / 20}deg)`; } };
+  el.onpointerup = e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; el.style.transform = '';
+    if (dx > 90) swipe(true); else if (dx < -90) swipe(false); };
+}
+async function swipe(liked) {
+  const c = queue.shift(); if (!c) return;
+  await sb.from('swipes').insert({ from_id: user.id, to_id: c.id, liked });
+  if (liked) { const { data } = await sb.rpc('my_matches'); if ((data || []).some(m => m.id === c.id)) toast(`${c.name} ile eşleştiniz! Eşleşmeler sekmesine bak.`); }
+  showTop();
+}
+async function matchView() {
+  const { data } = await sb.rpc('my_matches');
+  app.innerHTML = `<div class="box"><h2>Eşleşmelerim</h2>${(data || []).map(m => `<div class="row"><b>${esc(m.name)}</b><span>${contactLink(m.contact_type, m.contact)}</span></div>`).join('') || '<p class="mut">Karşılıklı beğenince burada iletişim bilgisi görünür.</p>'}</div>`;
+}
+
+async function adminView() {
+  if (!isAdmin) return;
+  const { data } = await sb.from('meetups').select('*, profiles(name,dept,year,contact_type,contact)')
+    .eq('status', 'waiting').gt('expires_at', new Date().toISOString()).order('created_at');
+  const by = {}; (data || []).forEach(m => (by[m.interest + '|' + m.group_size] ||= []).push(m));
+  let ready = '', wait = '';
+  for (const [k, list] of Object.entries(by)) {
+    const [interest, size] = k.split('|'); const n = +size;
+    for (let i = 0; i + n <= list.length; i += n) {
+      const g = list.slice(i, i + n);
+      ready += `<div class="box"><h3>${esc(interest)} · ${n} kişilik grup</h3>${g.map(m => `<div class="row"><span>${esc(m.profiles.name)} <span class="mut">${esc(m.profiles.dept || '')} ${esc(m.profiles.year || '')}</span></span><span>${contactLink(m.profiles.contact_type, m.profiles.contact)}</span></div>`).join('')}
+      <button class="btn amb" onclick="doneGroup('${g.map(m => m.id).join(',')}')">Grup kuruldu</button></div>`;
+    }
+    const rest = list.length % n; if (rest) wait += `<div class="row"><span>${esc(interest)} · ${n} kişilik</span><span>${rest}/${n} kişi bekliyor</span></div>`;
+  }
+  app.innerHTML = `<h2>Hazır gruplar</h2>${ready || '<div class="box mut">Tamamlanan grup yok.</div>'}<div class="box"><h3>Bekleyenler</h3>${wait || '<span class="mut">Yok.</span>'}</div>`;
+}
+async function doneGroup(ids) { await sb.from('meetups').update({ status: 'done' }).in('id', ids.split(',').map(Number)); toast('Grup işaretlendi.'); adminView(); }
 </script>
 </body>
 </html>
