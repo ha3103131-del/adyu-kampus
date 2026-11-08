@@ -259,13 +259,12 @@ async function matchView() {
 /* ---------- buluşma ---------- */
 async function meetView() {
   const { data } = await sb.from('meetups').select('*').eq('user_id', user.id).gt('expires_at', new Date().toISOString()).order('created_at', { ascending: false });
-  const same = me.gender === 'kadin' ? 'Sadece kadınlar' : 'Sadece erkekler';
   view(`<h1>Buluşma</h1><p class="mut" style="margin:6px 0 16px">Konuyu seç, yeterli kişi olunca moderatör grubu kurup seni ekler.</p>
   <form class="card" onsubmit="addMeet(event)"><label class="f" style="margin-top:0">Konu</label><div class="ch">${TOPICS.map((t, i) => `<label><input type="radio" name="topic" value="${t}" ${i === 0 ? 'checked' : ''} onchange="topicChg()"><span>${t}</span></label>`).join('')}</div>
   <label class="f">Toplam kaç kişi buluşacak?</label><div class="sg">${[2,3,4,5,6,7].map(n => `<label><input type="radio" name="size" value="${n}" ${n === 4 ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
-  <label class="f">Kimlerle buluşmak istersin?</label><div class="sg"><label><input type="radio" name="gp" value="any" checked><span>Fark etmez</span></label><label><input type="radio" name="gp" value="same"><span>${same}</span></label></div>
+  <label class="f">Kimlerle buluşmak istersin?</label><div class="sg"><label><input type="radio" name="gp" value="any" checked><span>Fark etmez</span></label><label><input type="radio" name="gp" value="kadin"><span>Kadınlar</span></label><label><input type="radio" name="gp" value="erkek"><span>Erkekler</span></label></div>
   <button class="btn w">Talep oluştur</button><p class="mut" style="margin-top:10px">Talebin 30 gün sonra otomatik silinir.</p></form>
-  <h3 style="margin-bottom:8px">Taleplerim</h3><div class="card" style="padding:6px 18px">${(data || []).map(m => `<div class="row"><div class="t"><b>${esc(m.interest)}</b><div class="mut">${m.group_size} kişi · ${m.gender_pref === 'same' ? same : 'Fark etmez'}</div></div><span class="pill ${m.status === 'done' ? 'ok' : ''}">${m.status === 'done' ? 'Grup kuruldu' : 'Bekliyor'}</span><button class="btn sec sm" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut" style="padding:12px 0">Henüz talebin yok.</p>'}</div>`);
+  <h3 style="margin-bottom:8px">Taleplerim</h3><div class="card" style="padding:6px 18px">${(data || []).map(m => `<div class="row"><div class="t"><b>${esc(m.interest)}</b><div class="mut">${m.group_size} kişi · ${PL[m.gender_pref] || 'Fark etmez'}</div></div><span class="pill ${m.status === 'done' ? 'ok' : ''}">${m.status === 'done' ? 'Grup kuruldu' : 'Bekliyor'}</span><button class="btn sec sm" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut" style="padding:12px 0">Henüz talebin yok.</p>'}</div>`);
 }
 function topicChg() { const f = document.querySelector('input[name=topic]:checked').value === 'Flört'; document.querySelectorAll('input[name=size]').forEach(i => { i.disabled = f && i.value !== '2'; if (f) i.checked = i.value === '2'; }); }
 async function addMeet(e) {
@@ -336,12 +335,21 @@ async function adminLoad() {
     sb.from('meetups').select('*, profiles(name,dept,year,gender,contact_type,contact,badge,photo)').eq('status', 'waiting').gt('expires_at', now).order('created_at')]);
   A = { u: u.data || [], v: v.data || [], m: m.data || [] }; adminRender();
 }
+const PL = { any: 'Fark etmez', kadin: 'Sadece kadınlar', erkek: 'Sadece erkekler' };
 const GL = g => g === 'kadin' ? 'Kadın' : 'Erkek';
 function groupsOf(list) {
-  const by = {}; list.forEach(m => (by[`${m.interest}|${m.group_size}|${m.gender_pref === 'same' ? m.profiles.gender : 'any'}`] ||= []).push(m));
+  const by = {}; list.forEach(m => (by[m.interest + '|' + m.group_size] ||= []).push(m));
+  const ok = (a, b) => (a.gender_pref === 'any' || a.gender_pref === b.profiles.gender) && (b.gender_pref === 'any' || b.gender_pref === a.profiles.gender);
   const ready = [], wait = [];
-  for (const [k, l] of Object.entries(by)) { const [t, s, g] = k.split('|'), n = +s;
-    for (let i = 0; i + n <= l.length; i += n) ready.push({ t, n, g, l: l.slice(i, i + n) }); if (l.length % n) wait.push({ t, n, g, c: l.length % n }); }
+  for (const [key, l] of Object.entries(by)) {
+    const [t, sz] = key.split('|'), n = +sz, left = []; let pool = l.slice();
+    while (pool.length) {
+      const seed = pool.shift(), g = [seed];
+      for (const c of pool) if (g.length < n && g.every(x => ok(x, c))) g.push(c);
+      if (g.length === n) { ready.push({ t, n, l: g }); pool = pool.filter(x => !g.includes(x)); } else left.push(seed);
+    }
+    if (left.length) wait.push({ t, n, c: left.length });
+  }
   return { ready, wait };
 }
 function adminRender() {
@@ -351,10 +359,10 @@ function adminRender() {
     <div class="acts"><button class="btn" onclick="approveUser('${p.id}')">Onayla</button><button class="btn dng" onclick="rejectUser('${p.id}')">Reddet</button></div></div>`).join('') || '<div class="card mut">Onay bekleyen kayıt yok.</div>';
   if (atab === 'v') body = A.v.map(r => { const p = r.profiles || {}; return `<div class="card">${who(p)}<dl class="kv"><dt>Telefon</dt><dd><a href="tel:+${esc(r.phone)}">${esc(r.phone)}</a></dd></dl>
     <div class="acts"><button class="btn" onclick="approveBadge('${r.user_id}','blue')">Onayla</button><button class="btn" style="background:#7c3aed" onclick="approveBadge('${r.user_id}','super')">Süper onay</button><button class="btn sec" onclick="rejectV('${r.user_id}')">Sil</button></div></div>`; }).join('') || '<div class="card mut">Bekleyen doğrulama isteği yok.</div>';
-  if (atab === 'm') body = G.ready.map(x => `<div class="card"><h3>${esc(x.t)} · ${x.n} kişi</h3><p class="mut" style="margin-bottom:6px">${x.g === 'any' ? 'Karma grup' : 'Sadece ' + (x.g === 'kadin' ? 'kadınlar' : 'erkekler')}</p>
-    ${x.l.map(m => `<div class="row">${av(m.profiles, 40)}<div class="t"><b style="display:flex;align-items:center">${esc(m.profiles.name)}${badge(m.profiles.badge)}</b><span class="mut">${esc(m.profiles.dept || '')}</span></div>${contactLink(m.profiles.contact_type, m.profiles.contact)}</div>`).join('')}
+  if (atab === 'm') body = G.ready.map(x => `<div class="card"><h3>${esc(x.t)} · ${x.n} kişi</h3><p class="mut" style="margin-bottom:6px">${x.l.filter(m => m.profiles.gender === 'kadin').length} kadın · ${x.l.filter(m => m.profiles.gender === 'erkek').length} erkek</p>
+    ${x.l.map(m => `<div class="row">${av(m.profiles, 40)}<div class="t"><b style="display:flex;align-items:center">${esc(m.profiles.name)}${badge(m.profiles.badge)}</b><span class="mut">${esc(m.profiles.dept || '')} · ${GL(m.profiles.gender)} · ister: ${PL[m.gender_pref]}</span></div>${contactLink(m.profiles.contact_type, m.profiles.contact)}</div>`).join('')}
     <button class="btn w" onclick="doneGroup('${x.l.map(m => m.id).join(',')}')">Grubu kurdum, onayla</button></div>`).join('')
-    + `<div class="card"><h3 style="margin-bottom:6px">Bekleyenler</h3>${G.wait.map(w => `<div class="row"><span class="t">${esc(w.t)} · ${w.n} kişi · ${w.g === 'any' ? 'Karma' : GL(w.g)}</span><span class="mut">${w.c}/${w.n}</span></div>`).join('') || '<span class="mut">Yok.</span>'}</div>`;
+    + `<div class="card"><h3 style="margin-bottom:6px">Bekleyenler</h3>${G.wait.map(w => `<div class="row"><span class="t">${esc(w.t)} · ${w.n} kişilik</span><span class="mut">${w.c} kişi bekliyor</span></div>`).join('') || '<span class="mut">Yok.</span>'}</div>`;
   if (atab === 'u') body = `<input placeholder="İsim, kullanıcı adı, bölüm ya da telefon ara" oninput="usersList(this.value)"><div id="ul" style="margin-top:14px"></div>`;
   view(`<div style="display:flex;justify-content:space-between;align-items:center"><h1>Yönetim</h1><button class="btn sec sm" onclick="sb.auth.signOut()">Çıkış</button></div>
   <div class="tabs">${[['r','Kayıtlar',P.length],['v','Doğrulama',A.v.length],['m','Buluşma',G.ready.length],['u','Kullanıcılar',A.u.length]].map(([k, l, n]) => `<button class="${atab === k ? 'on' : ''}" onclick="atab='${k}';adminRender()">${l} (${n})</button>`).join('')}</div>${body}`);
