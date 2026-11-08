@@ -50,6 +50,7 @@ input[type=checkbox]:not(.sw){width:22px;min-height:0;height:22px;accent-color:#
 .fl{position:absolute;display:flex;gap:10px;align-items:center;padding:10px 16px 10px 10px;border-radius:20px;font-size:.84rem;animation:fy 5s ease-in-out infinite alternate}.fl b{display:block}.fl small{display:block;color:#c3c3dc;font-size:.74rem}.f1{left:0;bottom:44px}.f2{right:0;top:56px;animation-delay:-2.5s}@keyframes fy{to{transform:translateY(-12px)}}
 .ico{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--g);color:#fff;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}.fl .ico{width:34px;height:34px;border-radius:11px}
 .tip{display:flex;gap:12px;margin-top:18px;padding:14px;border-radius:16px;background:rgba(124,92,255,.13);border:1px solid rgba(167,139,250,.3);font-size:.88rem;color:#d7ccff}.tip>.ic{color:#b9a6ff;margin-top:2px}.tip b{display:block;color:#fff;margin-bottom:3px}.tip ul{margin:8px 0 0;padding-left:18px}.tip li{margin:4px 0}
+.wt summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none}.wt summary::-webkit-details-marker{display:none}.wt summary .t{flex:1}.wt summary b{display:block}.wt summary .ic{color:var(--mut);transition:transform .25s}.wt[open] summary .ic{transform:rotate(90deg)}.wt .row:first-of-type{margin-top:8px}
 .sect{margin-top:48px}.sect>h2{font-size:1.6rem;margin-bottom:16px}
 .fts{display:grid;gap:12px}.fts .card{margin:0;display:flex;gap:14px;align-items:flex-start}.fts p{color:var(--mut);font-size:.92rem;margin-top:4px}
 @media(min-width:900px){.hero{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:48px;padding:56px 0 24px}.cw{margin-top:0}.coll{height:520px}.fts{grid-template-columns:repeat(3,1fr)}.fts .card{flex-direction:column}main.wide .sect{max-width:none}#auth{max-width:520px;margin-left:auto;margin-right:auto}}
@@ -153,6 +154,7 @@ const signupForm = () => `<form onsubmit="signup(event)">
   <label class="f" for="sd">Bölüm</label><input id="sd" required maxlength="60">
   <label class="f" for="sy">Sınıf</label><select id="sy">${YEARS.map(y => `<option>${y}</option>`).join('')}</select>
   <label class="chk"><input type="checkbox" id="sv" checked><span>Kartım Keşfet bölümünde diğer öğrencilere gösterilsin. (Profilinden değiştirebilirsin.)</span></label>
+  <label class="chk"><input type="checkbox" id="sm"><span>Teklif ve fırsatlardan haberdar olmak istiyorum.</span></label>
   <label class="chk"><input type="checkbox" required><span><a href="#" onclick="kvkk();return false">KVKK aydınlatma metnini</a> okudum, kişisel verilerimin işlenmesine açık rıza veriyorum.</span></label>
   <p class="mut" style="margin-top:14px">Başvurun moderatöre iletilir. Moderatör onay için seninle iletişime geçer, tahmini süre 24 saattir.</p>
   <button class="btn w">Kayıt ol</button></form>`;
@@ -178,7 +180,7 @@ async function signup(e) {
   const r = await sb.auth.signUp({ email: UMAIL(u), password: $('#sp').value });
   if (r.error || !r.data.session) { busy = false; return toast(/registered/i.test(r.error?.message || '') ? 'Bu kullanıcı adı kullanılıyor.' : r.error ? 'Hata: ' + r.error.message : 'Kayıt tamamlanamadı. Supabase ayarında "Confirm email" kapalı olmalı.'); }
   const { error } = await sb.from('profiles').insert({ id: r.data.user.id, username: u, name: $('#sn').value.trim(), email: $('#se').value.trim(), phone: ph, gender: document.querySelector('input[name=sg]:checked').value,
-    dept: $('#sd').value.trim(), year: $('#sy').value, interests: [], bio: '', contact_type: 'phone', contact: ph, discoverable: $('#sv').checked });
+    dept: $('#sd').value.trim(), year: $('#sy').value, interests: [], bio: '', contact_type: 'phone', contact: ph, discoverable: $('#sv').checked, marketing: $('#sm').checked });
   await sb.auth.signOut(); busy = false; user = null;
   if (error) return toast('Kayıt tamamlanamadı: ' + error.message);
   notice = 'registered'; lmode = 'in'; landing();
@@ -266,7 +268,7 @@ async function meetView() {
   <label class="f">Toplam kaç kişi buluşacak?</label><div class="sg">${[2,3,4,5,6,7].map(n => `<label><input type="radio" name="size" value="${n}" ${n === 4 ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
   <label class="f">Kimlerle buluşmak istersin?</label><div class="sg"><label><input type="radio" name="gp" value="any" checked><span>Fark etmez</span></label><label><input type="radio" name="gp" value="kadin"><span>Kadınlar</span></label><label><input type="radio" name="gp" value="erkek"><span>Erkekler</span></label></div>
   <button class="btn w">Talep oluştur</button><div class="tip">${ic('info', 20)}<div><b>Talepler nasıl eşleşir?</b>Konu, kişi sayısı ve cinsiyet tercihi birbirine uyan talepler aynı grupta toplanır. Yeterli kişi olunca moderatör grubu kurar ve seninle iletişime geçer.
-  <ul><li>Uzun süredir buluşma çıkmadıysa farklı bir konu seçerek yeni bir talep oluştur.</li><li>Kişi sayısını azaltmak ya da cinsiyet tercihini "Fark etmez" yapmak eşleşme şansını artırır.</li><li>Aynı anda birden fazla talebin olabilir. Talebin 30 gün sonra otomatik silinir.</li></ul></div></div></form>
+  <ul><li>"Sohbet" ve "Tanışma" talepleri aynı grupta buluşturulur.</li><li>Uzun süredir buluşma çıkmadıysa farklı bir konu seçerek yeni bir talep oluştur.</li><li>Kişi sayısını azaltmak ya da cinsiyet tercihini "Fark etmez" yapmak eşleşme şansını artırır.</li><li>Aynı anda birden fazla talebin olabilir. Talebin 30 gün sonra otomatik silinir.</li></ul></div></div></form>
   <h3 style="margin-bottom:8px">Taleplerim</h3><div class="card" style="padding:6px 18px">${(data || []).map(m => `<div class="row"><div class="t"><b>${esc(m.interest)}</b><div class="mut">${m.group_size} kişi · ${PL[m.gender_pref] || 'Fark etmez'}</div></div><span class="pill ${m.status === 'done' ? 'ok' : ''}">${m.status === 'done' ? 'Grup kuruldu' : 'Bekliyor'}</span><button class="btn sec sm" onclick="delMeet(${m.id})">İptal</button></div>`).join('') || '<p class="mut" style="padding:12px 0">Henüz talebin yok.</p>'}</div>`);
 }
 function topicChg() { const f = document.querySelector('input[name=topic]:checked').value === 'Flört'; document.querySelectorAll('input[name=size]').forEach(i => { i.disabled = f && i.value !== '2'; if (f) i.checked = i.value === '2'; }); }
@@ -287,6 +289,7 @@ async function profileView() {
   ${me.bio ? `<p style="margin-top:12px">${esc(me.bio)}</p>` : ''}<div style="margin-top:12px">${(me.interests || []).map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div></div>
   <div class="list"><button class="li" onclick="editView()">${ic('edit')}<span class="t">Profili düzenle<small>Bilgilerini ve ilgi alanlarını güncelle</small></span>${ic('next', 18)}</button>${ver}
   <label class="li">${ic('compass')}<span class="t">Keşfet'te görün<small>Kartın diğer öğrencilere gösterilsin</small></span><input type="checkbox" class="sw" ${me.discoverable ? 'checked' : ''} onchange="setDisc(this.checked)"></label>
+  <label class="li">${ic('info')}<span class="t">Teklif ve fırsatlar<small>Kampüs indirimleri ve duyurulardan haberdar ol</small></span><input type="checkbox" class="sw" ${me.marketing ? 'checked' : ''} onchange="setMkt(this.checked)"></label>
   <button class="li" onclick="pwView()">${ic('lock')}<span class="t">Şifreyi değiştir</span>${ic('next', 18)}</button></div>
   <div class="list"><button class="li" onclick="sb.auth.signOut()">${ic('out')}<span class="t">Çıkış yap</span></button><button class="li dng" onclick="deleteMe()">${ic('trash')}<span class="t">Hesabımı sil</span></button></div>`);
 }
@@ -301,6 +304,7 @@ async function pickPhoto(inp) {
     await sb.from('profiles').update({ photo: url }).eq('id', user.id); me.photo = url; toast('Fotoğraf güncellendi.'); profileView();
   } catch (e) { toast('Fotoğraf yüklenemedi: ' + (e.message || 'bilinmeyen hata')); }
 }
+async function setMkt(v) { await sb.from('profiles').update({ marketing: v }).eq('id', user.id); me.marketing = v; }
 async function setDisc(v) { await sb.from('profiles').update({ discoverable: v }).eq('id', user.id); me.discoverable = v; }
 async function reqVerify() { const { error } = await sb.from('verify_requests').insert({ user_id: user.id, phone: me.phone }); toast(error ? 'Gönderilemedi: ' + error.message : 'İsteğin alındı.'); profileView(); }
 function editView() {
@@ -340,8 +344,10 @@ async function adminLoad() {
 }
 const PL = { any: 'Fark etmez', kadin: 'Sadece kadınlar', erkek: 'Sadece erkekler' };
 const GL = g => g === 'kadin' ? 'Kadın' : 'Erkek';
+const catKey = t => t === 'Tanışma' ? 'Sohbet' : t;
+const catLabel = t => t === 'Sohbet' ? 'Sohbet / Tanışma' : t;
 function groupsOf(list) {
-  const by = {}; list.forEach(m => (by[m.interest + '|' + m.group_size] ||= []).push(m));
+  const by = {}; list.forEach(m => (by[catKey(m.interest) + '|' + m.group_size] ||= []).push(m));
   const ok = (a, b) => (a.gender_pref === 'any' || a.gender_pref === b.profiles.gender) && (b.gender_pref === 'any' || b.gender_pref === a.profiles.gender);
   const ready = [], wait = [];
   for (const [key, l] of Object.entries(by)) {
@@ -351,10 +357,11 @@ function groupsOf(list) {
       for (const c of pool) if (g.length < n && g.every(x => ok(x, c))) g.push(c);
       if (g.length === n) { ready.push({ t, n, l: g }); pool = pool.filter(x => !g.includes(x)); } else left.push(seed);
     }
-    if (left.length) wait.push({ t, n, c: left.length });
+    if (left.length) wait.push({ t, n, l: left });
   }
   return { ready, wait };
 }
+const mrow = m => `<div class="row">${av(m.profiles, 40)}<div class="t"><b style="display:flex;align-items:center">${esc(m.profiles.name)}${badge(m.profiles.badge)}</b><span class="mut">${esc(m.profiles.dept || '')} · ${GL(m.profiles.gender)} · ister: ${PL[m.gender_pref]} · ${esc(m.interest)}</span></div>${contactLink(m.profiles.contact_type, m.profiles.contact)}</div>`;
 function adminRender() {
   const P = A.u.filter(p => p.status === 'pending'), G = groupsOf(A.m); let body = '';
   const who = p => `<div class="row" style="border:0;padding:0">${av(p, 48)}<div class="t"><b style="display:flex;align-items:center">${esc(p.name)}${badge(p.badge)}</b><span class="mut">${esc([p.dept, p.year].filter(Boolean).join(' · '))}</span></div></div>`;
@@ -362,19 +369,19 @@ function adminRender() {
     <div class="acts"><button class="btn" onclick="approveUser('${p.id}')">Onayla</button><button class="btn dng" onclick="rejectUser('${p.id}')">Reddet</button></div></div>`).join('') || '<div class="card mut">Onay bekleyen kayıt yok.</div>';
   if (atab === 'v') body = A.v.map(r => { const p = r.profiles || {}; return `<div class="card">${who(p)}<dl class="kv"><dt>Telefon</dt><dd><a href="tel:+${esc(r.phone)}">${esc(r.phone)}</a></dd></dl>
     <div class="acts"><button class="btn" onclick="approveBadge('${r.user_id}','blue')">Onayla</button><button class="btn" style="background:#7c3aed" onclick="approveBadge('${r.user_id}','super')">Süper onay</button><button class="btn sec" onclick="rejectV('${r.user_id}')">Sil</button></div></div>`; }).join('') || '<div class="card mut">Bekleyen doğrulama isteği yok.</div>';
-  if (atab === 'm') body = G.ready.map(x => `<div class="card"><h3>${esc(x.t)} · ${x.n} kişi</h3><p class="mut" style="margin-bottom:6px">${x.l.filter(m => m.profiles.gender === 'kadin').length} kadın · ${x.l.filter(m => m.profiles.gender === 'erkek').length} erkek</p>
-    ${x.l.map(m => `<div class="row">${av(m.profiles, 40)}<div class="t"><b style="display:flex;align-items:center">${esc(m.profiles.name)}${badge(m.profiles.badge)}</b><span class="mut">${esc(m.profiles.dept || '')} · ${GL(m.profiles.gender)} · ister: ${PL[m.gender_pref]}</span></div>${contactLink(m.profiles.contact_type, m.profiles.contact)}</div>`).join('')}
+  if (atab === 'm') body = G.ready.map(x => `<div class="card"><h3>${esc(catLabel(x.t))} · ${x.n} kişi</h3><p class="mut" style="margin-bottom:6px">${x.l.filter(m => m.profiles.gender === 'kadin').length} kadın · ${x.l.filter(m => m.profiles.gender === 'erkek').length} erkek</p>${x.l.map(mrow).join('')}
     <button class="btn w" onclick="doneGroup('${x.l.map(m => m.id).join(',')}')">Grubu kurdum, onayla</button></div>`).join('')
-    + `<div class="card"><h3 style="margin-bottom:6px">Bekleyenler</h3>${G.wait.map(w => `<div class="row"><span class="t">${esc(w.t)} · ${w.n} kişilik</span><span class="mut">${w.c} kişi bekliyor</span></div>`).join('') || '<span class="mut">Yok.</span>'}</div>`;
+    + `<h3 style="margin:20px 0 10px">Bekleyenler</h3>` + (G.wait.map(w => `<details class="card wt"><summary><div class="t"><b>${esc(catLabel(w.t))} · ${w.n} kişilik</b><span class="mut">${w.l.length} kişi bekliyor</span></div>${ic('next', 20)}</summary>${w.l.map(mrow).join('')}
+    <button class="btn w sec" onclick="doneGroup('${w.l.map(m => m.id).join(',')}')">Bu kişilerle grubu kurdum</button></details>`).join('') || '<div class="card mut">Bekleyen talep yok.</div>');
   if (atab === 'u') body = `<input placeholder="İsim, kullanıcı adı, bölüm ya da telefon ara" oninput="usersList(this.value)"><div id="ul" style="margin-top:14px"></div>`;
   view(`<div style="display:flex;justify-content:space-between;align-items:center"><h1>Yönetim</h1><button class="btn sec sm" onclick="sb.auth.signOut()">Çıkış</button></div>
-  <div class="tabs">${[['r','Kayıtlar',P.length],['v','Doğrulama',A.v.length],['m','Buluşma',G.ready.length],['u','Kullanıcılar',A.u.length]].map(([k, l, n]) => `<button class="${atab === k ? 'on' : ''}" onclick="atab='${k}';adminRender()">${l} (${n})</button>`).join('')}</div>${body}`);
+  <div class="tabs">${[['r','Kayıtlar',P.length],['v','Doğrulama',A.v.length],['m','Buluşma',A.m.length],['u','Kullanıcılar',A.u.length]].map(([k, l, n]) => `<button class="${atab === k ? 'on' : ''}" onclick="atab='${k}';adminRender()">${l} (${n})</button>`).join('')}</div>${body}`);
   if (atab === 'u') usersList('');
 }
 function usersList(q) {
   q = q.toLowerCase();
   $('#ul').innerHTML = A.u.filter(p => [p.name, p.username, p.dept, p.phone, p.email].join(' ').toLowerCase().includes(q)).map(p => `<div class="card"><div class="row" style="border:0;padding:0">${av(p, 48)}<div class="t"><b style="display:flex;align-items:center">${esc(p.name)}${badge(p.badge)}</b><span class="mut">@${esc(p.username || '')}</span></div><span class="pill ${p.status === 'approved' ? 'ok' : ''}">${p.status === 'approved' ? 'Onaylı' : 'Bekliyor'}</span></div>
-  <dl class="kv"><dt>Bölüm</dt><dd>${esc([p.dept, p.year].filter(Boolean).join(' · '))}</dd><dt>E-posta</dt><dd>${esc(p.email || '-')}</dd><dt>Telefon</dt><dd>${esc(p.phone || '-')}</dd><dt>Cinsiyet</dt><dd>${p.gender ? GL(p.gender) : '-'}</dd><dt>İlgi</dt><dd>${(p.interests || []).map(esc).join(', ') || '-'}</dd><dt>Keşfet</dt><dd>${p.discoverable ? 'Açık' : 'Kapalı'}</dd><dt>Kayıt</dt><dd>${new Date(p.created_at).toLocaleDateString('tr-TR')}</dd></dl>
+  <dl class="kv"><dt>Bölüm</dt><dd>${esc([p.dept, p.year].filter(Boolean).join(' · '))}</dd><dt>E-posta</dt><dd>${esc(p.email || '-')}</dd><dt>Telefon</dt><dd>${esc(p.phone || '-')}</dd><dt>Cinsiyet</dt><dd>${p.gender ? GL(p.gender) : '-'}</dd><dt>İlgi</dt><dd>${(p.interests || []).map(esc).join(', ') || '-'}</dd><dt>Keşfet</dt><dd>${p.discoverable ? 'Açık' : 'Kapalı'}</dd><dt>Fırsat bildirimi</dt><dd>${p.marketing ? 'İstiyor' : 'İstemiyor'}</dd><dt>Kayıt</dt><dd>${new Date(p.created_at).toLocaleDateString('tr-TR')}</dd></dl>
   <div class="acts"><select style="flex:1" onchange="setBadge('${p.id}',this.value)" aria-label="Tik"><option value="" ${!p.badge ? 'selected' : ''}>Tik yok</option><option value="blue" ${p.badge === 'blue' ? 'selected' : ''}>Mavi tik</option><option value="super" ${p.badge === 'super' ? 'selected' : ''}>Süper tik</option></select><button class="btn dng sm" onclick="rejectUser('${p.id}')">Sil</button></div></div>`).join('') || '<div class="card mut">Kullanıcı bulunamadı.</div>';
 }
 async function approveUser(id) { const { error } = await sb.from('profiles').update({ status: 'approved' }).eq('id', id); toast(error ? 'Hata: ' + error.message : 'Kullanıcı onaylandı.'); adminLoad(); }
